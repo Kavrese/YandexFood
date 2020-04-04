@@ -1,5 +1,7 @@
 package com.example.yandex_food;
 
+import android.widget.ImageView;
+
 public class Restaurants {
     private int id_img;
     private int time;
@@ -18,8 +20,9 @@ public class Restaurants {
     public int getId_img() {
         return id_img;
     }
-    public float getStars() {
-        return stars;
+    public String getStars() {
+        String s = Float.toString(stars);
+        return s;
     }
     public int getCost() {
         return cost;

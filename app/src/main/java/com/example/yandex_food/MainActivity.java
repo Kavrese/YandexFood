@@ -21,9 +21,13 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+     RecyclerView recyclerView;
     private ActionBarDrawerToggle toggle;
     ImageView open_menu;
     DrawerLayout drawerLayout;
@@ -31,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recyclerView = findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ArrayList<Restaurants> arrayList = new ArrayList<Restaurants>();
+        arrayList.add(new Restaurants(R.drawable.img1,20,2,3.5f,"Vegetarian"));
+        arrayList.add(new Restaurants(R.drawable.img2,30,3,4.0f,"Время еды"));
+        arrayList.add(new Restaurants(R.drawable.img3,35,1,2.0f,"QLB"));
+        arrayList.add(new Restaurants(R.drawable.img4,45,2,4.5f,"Burger King"));
+
+        RestaurantsAdapter restaurantsAdapter = new RestaurantsAdapter(arrayList);
+        recyclerView.setAdapter(restaurantsAdapter);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         open_menu = findViewById(R.id.menuopen);
