@@ -57,6 +57,6 @@
                 android:src="@drawable/search"></ImageView>
         </LinearLayout>
 
-    </androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>"
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
