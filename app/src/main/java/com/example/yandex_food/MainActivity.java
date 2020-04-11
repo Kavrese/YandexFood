@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -41,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     ImageView open_menu;
     DrawerLayout drawerLayout;
     TextView found;
-
+    String x,y;
+    LocationManager locationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,42 +61,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         RestaurantsAdapter restaurantsAdapter = new RestaurantsAdapter(arrayList);
         recyclerView.setAdapter(restaurantsAdapter);
         found = findViewById(R.id.foundtext);
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер определения координат
-        //Проверка на разрешение
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер определения координат
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Проверка наличия разрешений
+            // Если нет разрешения на использование соответсвующих разркешений выполняем какие-то действия
             return;
         }
-        LocationListener listener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                if (location != null) {
-                    String h = String.valueOf(location.getLatitude());
-                    String d = String.valueOf(location.getLongitude());
-                    found.setText("Ширина: "+ h + "Долгота: " + d);
-                    Log.d("TAG", "Широта="+location.getLatitude());
-                    Log.d("TAG", "Долгота="+location.getLongitude());
-                    Toast.makeText(getApplicationContext(), h+" и " + d, Toast.LENGTH_SHORT).show();
-                } else {
-                    found.setText("Sorry, location not found");
-                }
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-        locationManager.requestSingleUpdate (LocationManager.GPS_PROVIDER, listener, null);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
 
         open_menu = findViewById(R.id.menuopen);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -117,20 +95,45 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 return false;
             }
         });
+        found.setText("Широта: "+x+" Долгота: "+y);
     }
-
-
-
 
 
     public void onSearch (View view){
         Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
     }
 
+    private LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            if (location!=null) {
+                x = String.valueOf(location.getLatitude());
+                y = String.valueOf(location.getLongitude());
+            }else{
+                x = "Error";
+                y = "Error";
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
     @Override
     public void onLocationChanged(Location location) {
-       
+
     }
 
     @Override
