@@ -4,12 +4,12 @@ import android.widget.ImageView;
 
 public class Restaurants {
     private int id_img;
-    private int time;
+    private String time;
     private int cost;
     private float stars;
     private String restaurant;
 
-    public Restaurants(int id_img,int time,int cost, float stars, String restaurant){
+    public Restaurants(int id_img, String time, int cost, float stars, String restaurant){
         this.id_img = id_img;
         this.time = time;
         this.cost = cost;
@@ -18,19 +18,19 @@ public class Restaurants {
     }
 
     public int getId_img() {
-        return id_img;
+        return this.id_img;
     }
     public String getStars() {
         String s = Float.toString(stars);
         return s;
     }
     public int getCost() {
-        return cost;
+        return this.cost;
     }
-    public int getTime() {
-        return time;
+    public String getTime() {
+        return this.time;
     }
     public String getRestaurant() {
-        return restaurant;
+        return this.restaurant;
     }
 }

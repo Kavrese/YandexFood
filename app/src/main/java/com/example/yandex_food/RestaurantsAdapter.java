@@ -14,9 +14,9 @@ import java.util.List;
 
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.RestaurantsViewHolder> {
     private ArrayList<Restaurants> restaurants;
-    private TextView cost1;
-    private TextView cost2;
-    private TextView cost3;
+    private ImageView cost1;
+    private ImageView cost2;
+    private ImageView cost3;
     public RestaurantsAdapter(ArrayList<Restaurants> restaurants){
         this.restaurants = restaurants;
     }
@@ -47,11 +47,23 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantsViewHolder holder, int position) {
-        holder.restaurant.setText(restaurants.get(position).getRestaurant());
+        switch (restaurants.get(position).getId_img()){
+            case 1:
+                holder.id_img.setImageResource(R.drawable.img1);
+                break;
+            case 2:
+                holder.id_img.setImageResource(R.drawable.img2);
+                break;
+            case 3:
+                holder.id_img.setImageResource(R.drawable.img3);
+                break;
+            case 4:
+                holder.id_img.setImageResource(R.drawable.img4);
+                break;
+
+        }
         holder.time.setText(restaurants.get(position).getTime());
-        holder.id_img.setImageResource(restaurants.get(position).getId_img());
-        holder.stars.setText(restaurants.get(position).getStars());
-        switch (restaurants.get(position).getCost()){
+         switch (restaurants.get(position).getCost()){
             case 1:
                 cost1.setBackgroundResource(R.drawable.ruble_yes);
                 cost2.setBackgroundResource(R.drawable.ruble_no);
@@ -68,6 +80,9 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                 cost3.setBackgroundResource(R.drawable.ruble_yes);
                 break;
         }
+        holder.stars.setText(restaurants.get(position).getStars());
+        holder.restaurant.setText(restaurants.get(position).getRestaurant());
+
     }
 
     @Override

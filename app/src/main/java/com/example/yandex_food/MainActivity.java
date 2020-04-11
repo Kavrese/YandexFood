@@ -21,6 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +29,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
      RecyclerView recyclerView;
-    private ActionBarDrawerToggle toggle;
     ImageView open_menu;
     DrawerLayout drawerLayout;
     @Override
@@ -36,19 +36,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<Restaurants> arrayList = new ArrayList<Restaurants>();
-        arrayList.add(new Restaurants(R.drawable.img1,20,2,3.5f,"Vegetarian"));
-        arrayList.add(new Restaurants(R.drawable.img2,30,3,4.0f,"Время еды"));
-        arrayList.add(new Restaurants(R.drawable.img3,35,1,2.0f,"QLB"));
-        arrayList.add(new Restaurants(R.drawable.img4,45,2,4.5f,"Burger King"));
+       // recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
+        ArrayList<Restaurants> arrayList = new ArrayList<>();
+        arrayList.add(new Restaurants(1,"20",2,3.5f,"Vegetarian"));
+        arrayList.add(new Restaurants(2,"30",3,4.0f,"Время еды"));
+        arrayList.add(new Restaurants(3,"35",1,2.0f,"QLB"));
+        arrayList.add(new Restaurants(4,"45",2,4.5f,"Burger King"));
 
         RestaurantsAdapter restaurantsAdapter = new RestaurantsAdapter(arrayList);
         recyclerView.setAdapter(restaurantsAdapter);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         open_menu = findViewById(R.id.menuopen);
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -72,21 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-        toggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.setDrawerListener(toggle);
-
     }
 
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        toggle.syncState();
-    }
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        toggle.onConfigurationChanged(newConfig);
-    }
+
+
     public void onSearch (View view){
         Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
     }
