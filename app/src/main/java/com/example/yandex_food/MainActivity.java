@@ -130,16 +130,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public void onLocationChanged(Location location) {
-        if (location != null) {
-            String h = String.valueOf(location.getLatitude());
-            String d = String.valueOf(location.getLongitude());
-            this.found.setText("Ширина: "+ h + "Долгота: " + d);
-            Log.d("TAG", "Широта="+location.getLatitude());
-            Log.d("TAG", "Долгота="+location.getLongitude());
-            Toast.makeText(this, h+" и " + d, Toast.LENGTH_SHORT).show();
-        } else {
-            this.found.setText("Sorry, location not found");
-        }
+       
     }
 
     @Override
