@@ -57,6 +57,34 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         RestaurantsAdapter restaurantsAdapter = new RestaurantsAdapter(arrayList);
         recyclerView.setAdapter(restaurantsAdapter);
         found = findViewById(R.id.foundtext);
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер определения координат
+        //Проверка на разрешение
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationListener listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+        locationManager.requestSingleUpdate (LocationManager.GPS_PROVIDER, listener, null);
+
         open_menu = findViewById(R.id.menuopen);
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -80,14 +108,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 return false;
             }
         });
+    }
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер определения координат
-        //Проверка на разрешение
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        }
 
 
 
@@ -102,12 +124,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if (location != null) {
             String h = String.valueOf(location.getLatitude());
             String d = String.valueOf(location.getLongitude());
-            found.setText("Ширина: "+ h + "Долгота: " + d);
+            this.found.setText("Ширина: "+ h + "Долгота: " + d);
             Log.d("TAG", "Широта="+location.getLatitude());
             Log.d("TAG", "Долгота="+location.getLongitude());
-
+            Toast.makeText(this, h+" и " + d, Toast.LENGTH_SHORT).show();
         } else {
-            found.setText("Sorry, location not found");
+            this.found.setText("Sorry, location not found");
         }
     }
 
