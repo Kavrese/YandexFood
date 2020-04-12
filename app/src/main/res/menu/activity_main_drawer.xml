@@ -25,5 +25,10 @@
             android:icon="@drawable/rgb"
             android:title="@string/menu_stile"
             />
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/exit"
+            android:title="@string/menu_exit"
+            />
     </group>
 </menu>

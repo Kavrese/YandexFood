@@ -16,6 +16,7 @@
     <string name="menu_about">О сервисе</string>
     <string name="menu_man">Стать курьеров</string>
     <string name="menu_stile">Сменить тему</string>
+    <string name="menu_exit">Выход</string>
 
     <string name="home_second">Home Second</string>
 

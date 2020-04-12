@@ -17,15 +17,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     private ImageView cost1;
     private ImageView cost2;
     private ImageView cost3;
+    private TextView tex;
     public RestaurantsAdapter(ArrayList<Restaurants> restaurants){
         this.restaurants = restaurants;
     }
 
     class RestaurantsViewHolder extends RecyclerView.ViewHolder{
         ImageView id_img;
-        TextView time;
-        TextView stars;
-        TextView restaurant;
+        TextView restaurant,stars,time,tag1,tag2;
         RestaurantsViewHolder(View view){
             super(view);
             id_img = view.findViewById(R.id.img);
@@ -33,8 +32,11 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             cost1 = view.findViewById(R.id.cost1);
             cost2 = view.findViewById(R.id.cost2);
             cost3 = view.findViewById(R.id.cost3);
+            tag1 = view.findViewById(R.id.tag1);
+            tag2 = view.findViewById(R.id.tag2);
             stars = view.findViewById(R.id.star);
             restaurant = view.findViewById(R.id.restaurant);
+            tex = view.findViewById(R.id.text);
         }
     }
 
@@ -91,7 +93,15 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         }
         holder.stars.setText(restaurants.get(position).getStars());
         holder.restaurant.setText(restaurants.get(position).getRestaurant());
+        holder.tag1.setText(restaurants.get(position).getTag1());
 
+        if ("none".equals(restaurants.get(position).getTag2())) {
+            tex.setVisibility(View.INVISIBLE);
+            holder.tag1.setVisibility(View.INVISIBLE);
+            holder.tag2.setText(restaurants.get(position).getTag1());
+        } else {
+            holder.tag2.setText(restaurants.get(position).getTag2());
+        }
     }
 
     @Override

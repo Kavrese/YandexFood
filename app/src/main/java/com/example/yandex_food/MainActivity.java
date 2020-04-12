@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<Restaurants> arrayList = new ArrayList<>();
-        arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers"));
-        arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's"));
-        arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB"));
-        arrayList.add(new Restaurants(4, "~45", 2, 3.0f, "Ваши Насти"));
-        arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza"));
-        arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen"));
-        arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe"));
+        arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская"));
+        arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры"));
+        arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none"));
+        arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская"));
+        arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none"));
+        arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей"));
+        arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none"));
 
         RestaurantsAdapter restaurantsAdapter = new RestaurantsAdapter(arrayList);
         recyclerView.setAdapter(restaurantsAdapter);
@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_stile:
                         Toast.makeText(MainActivity.this, "Скоро добавлю изменение темы", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_exit:
+                        System.exit(1);
                         break;
                 }
                 return false;
