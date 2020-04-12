@@ -8,24 +8,24 @@
     <ImageView
         android:id="@+id/img"
         android:layout_width="0dp"
-        android:layout_height="392dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="185dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        app:layout_constraintBottom_toBottomOf="@+id/img"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.946"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@color/white" />
 
     <TextView
@@ -88,16 +88,14 @@
         android:id="@+id/linearLayout"
         android:layout_width="85dp"
         android:layout_height="25dp"
-        android:layout_marginEnd="212dp"
-        android:layout_marginRight="212dp"
         android:orientation="horizontal"
         android:weightSum="3"
-        app:layout_constraintBottom_toBottomOf="@+id/img"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant"
-        app:layout_constraintVertical_bias="0.333">
+        app:layout_constraintTop_toBottomOf="@+id/img"
+        app:layout_constraintVertical_bias="0.65">
 
         <ImageView
             android:id="@+id/cost1"
@@ -111,7 +109,7 @@
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ruble_yes" />
+            app:srcCompat="@drawable/ruble_no" />
 
         <ImageView
             android:id="@+id/cost3"
@@ -119,18 +117,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/ruble_no" />
+
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="19dp"
-        android:layout_height="57dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.074"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toEndOf="@+id/star"
         app:layout_constraintTop_toBottomOf="@+id/restaurant"
-        app:layout_constraintVertical_bias="0.27"
+        app:layout_constraintVertical_bias="0.42000002"
         app:srcCompat="@drawable/wallet" />
 
     <TextView

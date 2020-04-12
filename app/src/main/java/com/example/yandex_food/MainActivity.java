@@ -51,17 +51,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
+        open_menu = findViewById(R.id.menuopen);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        found = findViewById(R.id.foundtext);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<Restaurants> arrayList = new ArrayList<>();
-        arrayList.add(new Restaurants(1, "20", 2, 3.5f, "Vegetarian"));
-        arrayList.add(new Restaurants(2, "30", 3, 4.0f, "Время еды"));
-        arrayList.add(new Restaurants(3, "35", 1, 2.0f, "QLB"));
-        arrayList.add(new Restaurants(4, "45", 2, 4.5f, "Burger King"));
+        arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers"));
+        arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's"));
+        arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB"));
+        arrayList.add(new Restaurants(4, "~45", 2, 3.0f, "Ваши Насти"));
 
         RestaurantsAdapter restaurantsAdapter = new RestaurantsAdapter(arrayList);
         recyclerView.setAdapter(restaurantsAdapter);
-        found = findViewById(R.id.foundtext);
-
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер определения координат
 
@@ -72,8 +74,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
 
-        open_menu = findViewById(R.id.menuopen);
-        drawerLayout = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
