@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Проверка наличия разрешений
-            // Если нет разрешения на использование соответсвующих разркешений выполняем какие-то действия
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
@@ -91,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         break;
                     case R.id.nav_about:
                         Toast.makeText(MainActivity.this, "Вы нажали на О сервисе ", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_stile:
+                        Toast.makeText(MainActivity.this, "Скоро добавлю изменение темы", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return false;

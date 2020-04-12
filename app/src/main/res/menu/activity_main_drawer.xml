@@ -20,5 +20,10 @@
             android:id="@+id/nav_man"
             android:icon="@drawable/run"
             android:title="@string/menu_man"/>
+        <item
+            android:id="@+id/nav_stile"
+            android:icon="@drawable/rgb"
+            android:title="@string/menu_stile"
+            />
     </group>
 </menu>
