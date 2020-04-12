@@ -39,7 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ImageView open_menu;
     DrawerLayout drawerLayout;
@@ -61,18 +61,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's"));
         arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB"));
         arrayList.add(new Restaurants(4, "~45", 2, 3.0f, "Ваши Насти"));
+        arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza"));
+        arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen"));
+        arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe"));
 
         RestaurantsAdapter restaurantsAdapter = new RestaurantsAdapter(arrayList);
         recyclerView.setAdapter(restaurantsAdapter);
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер определения координат
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Проверка наличия разрешений
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
-
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -98,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 return false;
             }
         });
-        found.setText("Широта: "+x+" Долгота: "+y);
     }
 
 
@@ -106,51 +99,5 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
     }
 
-    private LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            if (location!=null) {
-                x = String.valueOf(location.getLatitude());
-                y = String.valueOf(location.getLongitude());
-            }else{
-                x = "Error";
-                y = "Error";
-            }
-        }
 
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
-
-    @Override
-    public void onLocationChanged(Location location) {
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
 }

@@ -6,17 +6,126 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main"
-    android:background="@color/grey_white">
+    android:background="@color/white">
+
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/burger"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/maket_button_in_scroll_view"
+                android:text="@string/scr_burger" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/pizza"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/maket_button_in_scroll_view"
+                android:text="@string/scr_pizza" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/great_food"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/maket_button_in_scroll_view"
+                android:text="@string/scr_great_food" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/avtor"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/maket_button_in_scroll_view"
+                android:text="@string/scr_avtor" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/children"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/maket_button_in_scroll_view"
+                android:text="@string/scr_children" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/italian"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/maket_button_in_scroll_view"
+                android:text="@string/scr_italian" />
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/russian"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/maket_button_in_scroll_view"
+                android:text="@string/scr_russian" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="670dp"
+        android:layout_height="635dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

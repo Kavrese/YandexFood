@@ -18,4 +18,12 @@
     <string name="menu_stile">Сменить тему</string>
 
     <string name="home_second">Home Second</string>
+
+    <string name="scr_burger">Бургеры</string>
+    <string name="scr_pizza">Пицца</string>
+    <string name="scr_great_food">Здоровая еда</string>
+    <string name="scr_avtor">Авторская</string>
+    <string name="scr_children">Для детей</string>
+    <string name="scr_italian">Итальянская</string>
+    <string name="scr_russian">Русская</string>
 </resources>

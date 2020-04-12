@@ -60,6 +60,15 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             case 4:
                 holder.id_img.setImageResource(R.drawable.img4);
                 break;
+            case 5:
+                holder.id_img.setImageResource(R.drawable.img5);
+                break;
+            case 6:
+                holder.id_img.setImageResource(R.drawable.img6);
+                break;
+            case 7:
+                holder.id_img.setImageResource(R.drawable.img7);
+                break;
 
         }
         holder.time.setText(restaurants.get(position).getTime());

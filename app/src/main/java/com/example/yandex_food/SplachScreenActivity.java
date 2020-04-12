@@ -26,6 +26,6 @@ ImageView icon;
                 startActivity(in);
                 finish();
             }
-        },3000);
+        },2500);
     }
 }
