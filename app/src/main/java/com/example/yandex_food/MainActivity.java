@@ -1,5 +1,7 @@
 package com.example.yandex_food;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean stile_light = true;
     int clickA = 0,clickB = 0,clickC = 0,clickG = 0,clickP = 0,clickR = 0;
     RecyclerView recyclerView;
-    ImageView open_menu;
+    ImageView open_menu,search;
+    Toolbar toolbar;
     DrawerLayout drawerLayout;
     ConstraintLayout con;
     TextView found;
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         con = findViewById(R.id.con);
+        search = findViewById(R.id.search);
         recyclerView = findViewById(R.id.recyclerView);
         open_menu = findViewById(R.id.menuopen);
         drawerLayout = findViewById(R.id.drawer_layout);

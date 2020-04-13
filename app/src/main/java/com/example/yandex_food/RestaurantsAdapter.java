@@ -106,6 +106,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                holder.tag1.setVisibility(View.INVISIBLE);
                tex.setVisibility(View.INVISIBLE);
                holder.tag2.setText(restaurants.get(position).getTag1());
+               tex.setVisibility(View.INVISIBLE);
            } else {
                holder.tag2.setText(restaurants.get(position).getTag2());
            }

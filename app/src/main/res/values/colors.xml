@@ -8,11 +8,13 @@
     <color name="dark">#000000</color>
     <color name="grey">#777777</color>
     <color name="grey_white">#BFBFBF</color>
+    <color name="white_back_res">#F0F0EC</color>
     ----------Для смены тем--------------
     <color name="text_color_light">#000000</color>
     <color name="text_color_dark">#FFFF</color>
     <color name="tag_color_dark">#B3B3B3</color>
     <color name="tag_color_light">#777777</color>
+    <color name="dark_toolbar">#010D33</color>
     <color name="dark_up_back">#2D2F33</color>
     <color name="dark_up_back2">#25375C</color>
 </resources>
