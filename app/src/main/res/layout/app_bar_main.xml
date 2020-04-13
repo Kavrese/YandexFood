@@ -41,7 +41,7 @@
                 android:layout_width="270dp"
                 android:layout_height="35dp"
                 android:layout_weight="16"
-                android:background="@drawable/found_maket"
+                android:background="@drawable/found_maket_light"
                 android:gravity="center"
                 android:text="Ваш адресс"
                 android:textColor="#000000"
@@ -57,8 +57,6 @@
                 android:src="@drawable/search"></ImageView>
         </LinearLayout>
 
-    </androidx.appcompat.widget.Toolbar>
-
-    "
+    </androidx.appcompat.widget.Toolbar>"
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,34 +2,35 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/con"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar_main"
-    android:background="@color/white">
+    tools:showIn="@layout/app_bar_main">
 
     <HorizontalScrollView
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:scrollbars="none">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/burger"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_burger" />
 
@@ -43,7 +44,7 @@
                 android:id="@+id/pizza"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:background="@drawable/maket_button_in_scroll_view_no"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_pizza" />
 
@@ -58,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_great_food" />
 
@@ -73,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_avtor" />
 
@@ -88,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_children" />
 
@@ -103,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_italian" />
 
@@ -118,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_russian" />
         </LinearLayout>
