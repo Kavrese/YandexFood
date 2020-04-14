@@ -26,10 +26,9 @@ import static android.media.CamcorderProfile.get;
 
 public class MainActivity extends AppCompatActivity {
     private boolean stile_light = true;
-    int clickA = 0,clickB = 0,clickC = 0,clickG = 0,clickP = 0,clickR = 0;
+    int clickA = 0,clickB = 0,clickC = 0,clickG = 0,clickP = 0,clickR = 0; //Счётчики кликов у кнопок в ScrollView
     RecyclerView recyclerView;
     ImageView open_menu,search;
-    Toolbar toolbar;
     DrawerLayout drawerLayout;
     ConstraintLayout con;
     TextView found;
@@ -113,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 clickG = 0;
                 clickR = 0;
 
-                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская"));
-                arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none"));
+                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+                arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
                 if (clickA >= 2){
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     standartArrayList();
@@ -135,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
                 clickG = 0;
                 clickR = 0;
 
-                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры"));
-                arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none"));
+                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+                arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
                 if (clickB >= 2){
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     standartArrayList();
@@ -157,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
                 clickG = 0;
                 clickR = 0;
 
-                arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none"));
-                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей"));
+                arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none",stile_light));
+                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
                 if (clickP >= 2){
                     pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     standartArrayList();
@@ -179,8 +178,8 @@ public class MainActivity extends AppCompatActivity {
                 clickG = 0;
                 clickR++;
 
-                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская"));
-                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская"));
+                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
                 if (clickR >= 2){
                     russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     standartArrayList();
@@ -201,8 +200,8 @@ public class MainActivity extends AppCompatActivity {
                 clickG = 0;
                 clickR = 0;
 
-                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры"));
-                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей"));
+                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
                 if (clickC >= 2){
                     children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     standartArrayList();
@@ -223,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 clickG ++;
                 clickR = 0;
 
-                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская"));
+                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
                 if (clickG >= 2){
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     standartArrayList();
@@ -241,13 +240,13 @@ public class MainActivity extends AppCompatActivity {
         clickP = 0;
         clickR = 0;
         arrayList.clear();
-        arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская"));
-        arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры"));
-        arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none"));
-        arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская"));
-        arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none"));
-        arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей"));
-        arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none"));
+        arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+        arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+        arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
+        arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
+        arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none",stile_light));
+        arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
+        arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
     }
 
     public void onSwithStile (){

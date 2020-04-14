@@ -6,8 +6,9 @@ public class Restaurants {
     private int cost;
     private float stars;
     private String restaurant,tag1,tag2;
+    private boolean light;
 
-    public Restaurants(int id_img, String time, int cost, float stars, String restaurant,String tag1,String tag2){
+    public Restaurants(int id_img, String time, int cost, float stars, String restaurant,String tag1,String tag2,boolean light){
         this.id_img = id_img;
         this.time = time;
         this.cost = cost;
@@ -15,6 +16,7 @@ public class Restaurants {
         this.restaurant = restaurant;
         this.tag1 = tag1;
         this.tag2 = tag2;
+        this.light = light;
     }
 
     public int getId_img() {
@@ -35,10 +37,15 @@ public class Restaurants {
     }
 
     public String getTag2() {
+        tag2 = " "+tag2;        //Пробел, что-бы Tag1 и Tag2 не слипались
         return tag2;
     }
 
     public String getTag1() {
         return tag1;
+    }
+
+    public boolean getLight() {
+        return light;
     }
 }

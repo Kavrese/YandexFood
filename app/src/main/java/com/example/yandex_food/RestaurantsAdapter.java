@@ -1,12 +1,15 @@
 package com.example.yandex_food;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,12 +21,13 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     private ImageView cost2;
     private ImageView cost3;
     private TextView tex;
+    private boolean light;
     public RestaurantsAdapter(ArrayList<Restaurants> restaurants){
         this.restaurants = restaurants;
     }
 
     class RestaurantsViewHolder extends RecyclerView.ViewHolder{
-        ImageView id_img;
+        ImageView id_img,poleIMG,walletIMG,starsIMG;
         TextView restaurant,stars,time,tag1,tag2;
         RestaurantsViewHolder(View view){
             super(view);
@@ -36,7 +40,9 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             tag2 = view.findViewById(R.id.tag2);
             stars = view.findViewById(R.id.star);
             restaurant = view.findViewById(R.id.restaurant);
-            tex = view.findViewById(R.id.text);
+            poleIMG = view.findViewById(R.id.imageView);
+            walletIMG = view.findViewById(R.id.imageView4);
+            starsIMG = view.findViewById(R.id.starsIMG);
         }
     }
 
@@ -51,10 +57,48 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     public void onBindViewHolder(@NonNull RestaurantsViewHolder holder, int position) {
         holder.tag1.setVisibility(View.VISIBLE);
         holder.tag2.setVisibility(View.VISIBLE);
-        tex.setVisibility(View.VISIBLE);
-        cost1.setBackgroundResource(R.drawable.ruble_yes);
-        cost2.setBackgroundResource(R.drawable.ruble_yes);
-        cost3.setBackgroundResource(R.drawable.ruble_yes);
+
+        light = restaurants.get(position).getLight();
+        if(light){                              //Если тема светлая
+            holder.poleIMG.setBackgroundResource(R.color.white);
+            holder.starsIMG.setBackgroundResource(R.drawable.star);
+            holder.restaurant.setTextColor(Color.argb(255,0,0,0));
+            switch (restaurants.get(position).getCost()) {
+                case 1:
+                    cost1.setBackgroundResource(R.drawable.ruble_yes);
+                    cost2.setBackgroundResource(R.drawable.ruble_no);
+                    cost3.setBackgroundResource(R.drawable.ruble_no);
+                    break;
+                case 2:
+                    cost1.setBackgroundResource(R.drawable.ruble_yes);
+                    cost2.setBackgroundResource(R.drawable.ruble_yes);
+                    cost3.setBackgroundResource(R.drawable.ruble_no);
+                    break;
+                case 3:
+                    cost1.setBackgroundResource(R.drawable.ruble_yes);
+                    cost2.setBackgroundResource(R.drawable.ruble_yes);
+                    cost3.setBackgroundResource(R.drawable.ruble_yes);
+                    break;
+            }
+        }else{              //Если тема тёмная
+            switch (restaurants.get(position).getCost()) {
+                case 1:
+                    cost1.setBackgroundResource(R.drawable.ruble_yes_light);
+                    cost2.setBackgroundResource(R.drawable.ruble_no_light);
+                    cost3.setBackgroundResource(R.drawable.ruble_no_light);
+                    break;
+                case 2:
+                    cost1.setBackgroundResource(R.drawable.ruble_yes_light);
+                    cost2.setBackgroundResource(R.drawable.ruble_yes_light);
+                    cost3.setBackgroundResource(R.drawable.ruble_no_light);
+                    break;
+                case 3:
+                    cost1.setBackgroundResource(R.drawable.ruble_yes_light);
+                    cost2.setBackgroundResource(R.drawable.ruble_yes_light);
+                    cost3.setBackgroundResource(R.drawable.ruble_yes_light);
+                    break;
+            }
+        }
 
            switch (restaurants.get(position).getId_img()) {
                case 1:
@@ -81,33 +125,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
            }
            holder.time.setText(restaurants.get(position).getTime());
-           switch (restaurants.get(position).getCost()) {
-               case 1:
-                   cost1.setBackgroundResource(R.drawable.ruble_yes);
-                   cost2.setBackgroundResource(R.drawable.ruble_no);
-                   cost3.setBackgroundResource(R.drawable.ruble_no);
-                   break;
-               case 2:
-                   cost1.setBackgroundResource(R.drawable.ruble_yes);
-                   cost2.setBackgroundResource(R.drawable.ruble_yes);
-                   cost3.setBackgroundResource(R.drawable.ruble_no);
-                   break;
-               case 3:
-                   cost1.setBackgroundResource(R.drawable.ruble_yes);
-                   cost2.setBackgroundResource(R.drawable.ruble_yes);
-                   cost3.setBackgroundResource(R.drawable.ruble_yes);
-                   break;
-           }
+
            holder.stars.setText(restaurants.get(position).getStars());
            holder.restaurant.setText(restaurants.get(position).getRestaurant());
            holder.tag1.setText(restaurants.get(position).getTag1());
 
-           if ("none".equals(restaurants.get(position).getTag2())) {
-               holder.tag1.setVisibility(View.INVISIBLE);
-               tex.setVisibility(View.INVISIBLE);
-               holder.tag2.setText(restaurants.get(position).getTag1());
-               tex.setVisibility(View.INVISIBLE);
-           } else {
+           if (restaurants.get(position).getTag2().equals(" none")){
+               holder.tag2.setVisibility(View.INVISIBLE);
+           }else{
                holder.tag2.setText(restaurants.get(position).getTag2());
            }
        }
