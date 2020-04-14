@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@color/white" />
+        android:background="@color/white" />
 
     <TextView
         android:id="@+id/restaurant"
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurant"
         app:layout_constraintVertical_bias="0.71000004"
-        app:srcCompat="@drawable/star" />
+        android:background="@drawable/star" />
 
     <TextView
         android:id="@+id/star"
@@ -105,21 +105,21 @@
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ruble_no" />
+            android:background="@drawable/ruble_no" />
 
         <ImageView
             android:id="@+id/cost2"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ruble_no" />
+            android:background="@drawable/ruble_no" />
 
         <ImageView
             android:id="@+id/cost3"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ruble_no" />
+            android:background="@drawable/ruble_no" />
 
     </LinearLayout>
 
@@ -133,7 +133,7 @@
         app:layout_constraintStart_toEndOf="@+id/star"
         app:layout_constraintTop_toBottomOf="@+id/img"
         app:layout_constraintVertical_bias="0.86"
-        app:srcCompat="@drawable/wallet" />
+        android:background="@drawable/wallet" />
 
     <TextView
         android:id="@+id/textView4"

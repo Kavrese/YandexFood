@@ -60,9 +60,15 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
         light = restaurants.get(position).getLight();
         if(light){                              //Если тема светлая
+            holder.restaurant.setTextColor(Color.argb(255,0,0,0));
+            holder.time.setTextColor(Color.argb(255,119,119,119));
+            holder.tag1.setTextColor(Color.argb(255,179,179,179));
+            holder.tag2.setTextColor(Color.argb(255,179,179,179));
+            holder.stars.setTextColor(Color.argb(255,0,0,0));
+            holder.walletIMG.setBackgroundResource(R.drawable.wallet);
             holder.poleIMG.setBackgroundResource(R.color.white);
             holder.starsIMG.setBackgroundResource(R.drawable.star);
-            holder.restaurant.setTextColor(Color.argb(255,0,0,0));
+            holder.poleIMG.setBackgroundResource(R.color.white);
             switch (restaurants.get(position).getCost()) {
                 case 1:
                     cost1.setBackgroundResource(R.drawable.ruble_yes);
@@ -81,6 +87,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                     break;
             }
         }else{              //Если тема тёмная
+            holder.restaurant.setTextColor(Color.argb(255,255,255,255));
+            holder.time.setTextColor(Color.argb(255,255,255,255));
+            holder.tag1.setTextColor(Color.argb(255,179,179,179));
+            holder.tag2.setTextColor(Color.argb(255,179,179,179));
+            holder.stars.setTextColor(Color.argb(255,255,255,255));
+            holder.walletIMG.setBackgroundResource(R.drawable.wallet_light);
+            holder.poleIMG.setBackgroundResource(R.color.dark_up_back);
+            holder.starsIMG.setBackgroundResource(R.drawable.star_light);
             switch (restaurants.get(position).getCost()) {
                 case 1:
                     cost1.setBackgroundResource(R.drawable.ruble_yes_light);
