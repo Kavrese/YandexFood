@@ -136,6 +136,15 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                case 7:
                    holder.id_img.setImageResource(R.drawable.img7);
                    break;
+               case 8:
+                   holder.id_img.setImageResource(R.drawable.img8);
+                   break;
+               case 9:
+                   holder.id_img.setImageResource(R.drawable.img9);
+                   break;
+               case 10:
+                   holder.id_img.setImageResource(R.drawable.img10);
+                   break;
 
            }
            holder.time.setText(restaurants.get(position).getTime());
@@ -150,7 +159,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                holder.tag2.setText(restaurants.get(position).getTag2());
            }
        }
-
 
     @Override
     public int getItemCount() {return restaurants.size();}

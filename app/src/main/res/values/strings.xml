@@ -27,4 +27,6 @@
     <string name="scr_children">Для детей</string>
     <string name="scr_italian">Итальянская</string>
     <string name="scr_russian">Русская</string>
+    <string name="scr_chicken">Курица</string>
+    <string name="src_sushi">Суши</string>
 </resources>

@@ -47,7 +47,34 @@
                 android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_pizza" />
+            <View
+                android:id="@+id/view20"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
+            <Button
+                android:id="@+id/сhicken"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
+                android:onClick="onClickScrollView"
+                android:text="@string/scr_chicken" />
+            <View
+                android:id="@+id/view21"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/sushi"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/maket_button_in_scroll_view_no_light"
+                android:onClick="onClickScrollView"
+                android:text="@string/src_sushi" />
             <View
                 android:id="@+id/view2"
                 android:layout_width="10dp"
