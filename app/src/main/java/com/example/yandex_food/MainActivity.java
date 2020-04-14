@@ -103,6 +103,15 @@ public class MainActivity extends AppCompatActivity {
         arrayList.clear();
         switch (view.getId()){
             case R.id.italian:
+                clickI++;
+                clickA = 0;
+                clickB = 0;
+                clickP = 0;
+                clickC = 0;
+                clickG = 0;
+                clickR = 0;
+                clickCh = 0;
+                clickS = 0;
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -113,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
                     italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_light);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    if (clickI >= 2){
+                        italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
                 }else{
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -123,9 +136,16 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    if (clickI >= 2){
+                        italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
+                    }
                 }
-                clickI++;
-                clickA = 0;
+                arrayList.add(new Restaurants(8, "~55", 2, 4.0f, "Ташир пицца","Пицца","Итальянская",stile_light));
+                break;
+            case R.id.avtor:
+                clickI = 0;
+                clickA++;
                 clickB = 0;
                 clickP = 0;
                 clickC = 0;
@@ -133,14 +153,6 @@ public class MainActivity extends AppCompatActivity {
                 clickR = 0;
                 clickCh = 0;
                 clickS = 0;
-
-                arrayList.add(new Restaurants(8, "~55", 2, 4.0f, "Ташир пицца","Пицца","Итальянская",stile_light));
-                if (clickI >= 2){
-                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
-                }
-                break;
-            case R.id.avtor:
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_light);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -151,6 +163,10 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    if (clickA >= 2){
+                        avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
                 }else{
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_dark);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -161,25 +177,24 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    if (clickA >= 2){
+                        avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
+                    }
                 }
+                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+                arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
+                break;
+            case R.id.burger:
                 clickI = 0;
-                clickA++;
-                clickB = 0;
+                clickA = 0;
+                clickB++;
                 clickP = 0;
                 clickC = 0;
                 clickG = 0;
                 clickR = 0;
                 clickCh = 0;
                 clickS = 0;
-
-                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
-                arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
-                if (clickA >= 2){
-                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
-                }
-                break;
-            case R.id.burger:
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -190,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    if (clickB >= 2){
+                        burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
                 }else{
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_dark);
@@ -200,25 +219,24 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    if (clickB >= 2){
+                        burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
+                    }
                 }
+                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+                arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
+                break;
+            case R.id.pizza:
                 clickI = 0;
                 clickA = 0;
-                clickB++;
-                clickP = 0;
+                clickB = 0;
+                clickP++;
                 clickC = 0;
                 clickG = 0;
                 clickR = 0;
                 clickCh = 0;
                 clickS = 0;
-
-                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
-                arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
-                if (clickB >= 2){
-                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
-                }
-                break;
-            case R.id.pizza:
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -229,6 +247,10 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    if (clickP >= 2){
+                        pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
                 }else{
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -239,26 +261,25 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    if (clickP >= 2){
+                        pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
+                    }
                 }
-                clickI = 0;
-                clickA = 0;
-                clickB = 0;
-                clickP++;
-                clickC = 0;
-                clickG = 0;
-                clickR = 0;
-                clickCh = 0;
-                clickS = 0;
-
                 arrayList.add(new Restaurants(8, "~55", 2, 4.0f, "Ташир пицца","Пицца","Итальянская",stile_light));
                 arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none",stile_light));
                 arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
-                if (clickP >= 2){
-                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
-                }
                 break;
             case R.id.russian:
+                clickI = 0;
+                clickA = 0;
+                clickB = 0;
+                clickP = 0;
+                clickC = 0;
+                clickG = 0;
+                clickR++;
+                clickCh = 0;
+                clickS = 0;
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -269,6 +290,10 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    if (clickR >= 2){
+                        russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
                 }else{
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -279,36 +304,39 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    if (clickR >= 2){
+                        russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
+                    }
                 }
+                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
+                break;
+
+            case R.id.children:
                 clickI = 0;
                 clickA = 0;
                 clickB = 0;
                 clickP = 0;
-                clickC = 0;
+                clickC++;
                 clickG = 0;
-                clickR++;
+                clickR = 0;
                 clickCh = 0;
                 clickS = 0;
-
-                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
-                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
-                if (clickR >= 2){
-                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
-                }
-                break;
-
-            case R.id.children:
                 if(stile_light){
                 avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_light);
                 great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    if (clickC >= 2){
+                        children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
                      }else{
                         avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                         burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -319,35 +347,39 @@ public class MainActivity extends AppCompatActivity {
                         great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                         sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                         sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    if (clickC >= 2){
+                        children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
                     }
+                    }
+
+                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
+                break;
+            case R.id.great_food:
                 clickI = 0;
                 clickA = 0;
                 clickB = 0;
                 clickP = 0;
-                clickC++;
-                clickG = 0;
+                clickC = 0;
+                clickG ++;
                 clickR = 0;
                 clickCh = 0;
                 clickS = 0;
-
-                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
-                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
-                if (clickC >= 2){
-                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
-                }
-                break;
-            case R.id.great_food:
                 if(stile_light){
                 avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_light);
                 chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                 sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    if (clickG >= 2){
+                        great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
                 }else{
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -358,46 +390,15 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_dark);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    if (clickG >= 2){
+                        great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
+                    }
                 }
-                clickI = 0;
-                clickA = 0;
-                clickB = 0;
-                clickP = 0;
-                clickC = 0;
-                clickG ++;
-                clickR = 0;
-                clickCh = 0;
-                clickS = 0;
-
                 arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
-                if (clickG >= 2){
-                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
-                }
                 break;
 
             case R.id.сhicken:
-                if(stile_light){
-                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_light);
-                }else{
-                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_dark);
-                }
 
                 clickI = 0;
                 clickA = 0;
@@ -408,14 +409,48 @@ public class MainActivity extends AppCompatActivity {
                 clickR = 0;
                 clickCh ++;
                 clickS = 0;
-                arrayList.add(new Restaurants(10, "~70", 2, 4.0f, "KFC","Курица","none",stile_light));
-                if (clickCh >= 2){
-                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
+                if(stile_light){
+                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_light);
+                    if (clickCh >= 2){
+                        chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
+                }else{
+                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_dark);
+                    if (clickCh >= 2){
+                        chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
+                    }
                 }
+                arrayList.add(new Restaurants(10, "~70", 2, 4.0f, "KFC","Курица","none",stile_light));
                 break;
 
             case R.id.sushi:
+                clickI = 0;
+                clickA = 0;
+                clickB = 0;
+                clickP = 0;
+                clickC = 0;
+                clickG = 0;
+                clickR = 0;
+                clickCh= 0;
+                clickS ++;
                 if(stile_light){
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -426,6 +461,10 @@ public class MainActivity extends AppCompatActivity {
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_light);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                    if (clickS >= 2){
+                        sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+                        standartArrayList();
+                    }
                 }else{
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -433,26 +472,17 @@ public class MainActivity extends AppCompatActivity {
                     russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes_dark);
                     italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                    if (clickS >= 2){
+                        sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+                        standartArrayList();
+                    }
                 }
-
-                clickI = 0;
-                clickA = 0;
-                clickB = 0;
-                clickP = 0;
-                clickC = 0;
-                clickG = 0;
-                clickR = 0;
-                clickCh= 0;
-                clickS ++;
 
                 arrayList.add(new Restaurants(9, "~35", 3, 5.0f, "Сушия","Суши","none",stile_light));
-                if (clickS >= 2){
-                   sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
-                    standartArrayList();
-                }
+
                 break;
         }
         recyclerView.getAdapter().notifyDataSetChanged();
