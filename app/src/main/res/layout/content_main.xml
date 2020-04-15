@@ -54,7 +54,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/сhicken"
+                android:id="@+id/chicken"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"

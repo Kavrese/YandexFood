@@ -20,6 +20,9 @@
 
     <string name="home_second">Home Second</string>
 
+    <string name="open_nav">open nav</string>
+    <string name="close_nav">close_nav</string>
+
     <string name="scr_burger">Бургеры</string>
     <string name="scr_pizza">Пицца</string>
     <string name="scr_great_food">Здоровая еда</string>

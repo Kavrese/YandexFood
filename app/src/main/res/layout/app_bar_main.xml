@@ -24,13 +24,14 @@
             <ImageView
                 android:id="@+id/menuopen"
                 android:layout_width="40dp"
-                android:layout_height="28dp"
+                android:layout_height="30dp"
                 android:layout_weight="4"
+                android:onClick="onOpenDrawer"
                 android:src="@drawable/openmenu"></ImageView>
 
             <TextView
                 android:id="@+id/foundtext"
-                android:layout_width="270dp"
+                android:layout_width="260dp"
                 android:layout_height="35dp"
                 android:layout_weight="16"
                 android:background="@drawable/found_maket_light"
