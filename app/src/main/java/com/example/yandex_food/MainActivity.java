@@ -1,5 +1,6 @@
 package com.example.yandex_food;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,17 +30,19 @@ public class MainActivity extends AppCompatActivity {
     int clickA = 0,clickB = 0,clickC = 0,clickG = 0,clickP = 0,clickR = 0,clickI = 0,clickS = 0,clickCh = 0; //Счётчики кликов у кнопок в ScrollView
     RecyclerView recyclerView;
     ImageView open_menu,search;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     DrawerLayout drawerLayout;
     ConstraintLayout con;
     TextView found;
     Button burger,children,russian,italian,pizza,great_food,avtor,chicken,sushi;
     ArrayList<Restaurants> arrayList = new ArrayList<>();
     RestaurantsAdapter restaurantsAdapter ;
-    ActionBarDrawerToggle drawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = getSharedPreferences("0",0);
         con = findViewById(R.id.con);
         search = findViewById(R.id.search);
         recyclerView = findViewById(R.id.recyclerView);
@@ -59,7 +62,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         restaurantsAdapter = new RestaurantsAdapter(arrayList);
         recyclerView.setAdapter(restaurantsAdapter);
-
+        if(sharedPreferences.getString("theme","first").equals("first")) {
+            stile_light = true;
+            editor = sharedPreferences.edit();
+            editor.putString("theme","light");
+            editor.apply();
+        }else{
+            switch (sharedPreferences.getString("theme","first")){
+                case "dark":
+                    stile_light = false;
+                    onSwithStile("dark");
+                    break;
+                case "first":
+                    Toast.makeText(getApplicationContext(),"Error First",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -80,10 +98,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_stile:
                         if(stile_light) {
                             Toast.makeText(MainActivity.this, "Изменение темы на тёмную", Toast.LENGTH_SHORT).show();
+                            onSwithStile("dark");
                         }else{
+                            onSwithStile("light");
                             Toast.makeText(MainActivity.this, "Изменение темы на светлую", Toast.LENGTH_SHORT).show();
                         }
-                        onSwithStile();
                         break;
                     case R.id.nav_exit:
                         System.exit(1);
@@ -559,9 +578,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onSwithStile (){
-        if (stile_light){   //Если тема была светлой
+    public void onSwithStile (String theme){
+        if (theme.equals("dark")){   //Если должна быть тёмной
             stile_light = false;
+            editor = sharedPreferences.edit();
+            editor.putString("theame","dark");
+            editor.apply();
             con.setBackgroundColor(getResources().getColor(R.color.dark));
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
             burger.setTextColor(getResources().getColor(R.color.text_color_dark));
@@ -582,8 +604,12 @@ public class MainActivity extends AppCompatActivity {
             sushi.setTextColor(getResources().getColor(R.color.text_color_dark));
             sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
 
-        }else{      //Если тема была тёмной
+        }
+        if(theme.equals("light")){      //Если тема должа быть светлой
             stile_light = true;
+            editor = sharedPreferences.edit();
+            editor.putString("theame","light");
+            editor.apply();
             con.setBackgroundColor(getResources().getColor(R.color.white_back_res));
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
             burger.setTextColor(getResources().getColor(R.color.text_color_light));
