@@ -33,17 +33,20 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     DrawerLayout drawerLayout;
-    ConstraintLayout con;
+    ConstraintLayout con,con2;
+    MenuItem user,comment,info,men,exit,color;
     TextView found;
     Button burger,children,russian,italian,pizza,great_food,avtor,chicken,sushi;
     ArrayList<Restaurants> arrayList = new ArrayList<>();
     RestaurantsAdapter restaurantsAdapter ;
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences("0",0);
         con = findViewById(R.id.con);
+        navigationView = findViewById(R.id.nav_view);
         search = findViewById(R.id.search);
         recyclerView = findViewById(R.id.recyclerView);
         open_menu = findViewById(R.id.menuopen);
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         avtor = findViewById(R.id.avtor);
         chicken = findViewById(R.id.chicken);
         sushi = findViewById(R.id.sushi);
+
         standartArrayList();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         restaurantsAdapter = new RestaurantsAdapter(arrayList);
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -579,12 +583,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSwithStile (String theme){
+        con2 = findViewById(R.id.con2);
         if (theme.equals("dark")){   //Если должна быть тёмной
+            con2 = findViewById(R.id.con2);
             stile_light = false;
             editor = sharedPreferences.edit();
-            editor.putString("theame","dark");
+            editor.putString("theme","dark");
             editor.apply();
             con.setBackgroundColor(getResources().getColor(R.color.dark));
+            navigationView.setBackgroundColor(getResources().getColor(R.color.dark_up_back2));
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
             burger.setTextColor(getResources().getColor(R.color.text_color_dark));
             avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -608,9 +615,10 @@ public class MainActivity extends AppCompatActivity {
         if(theme.equals("light")){      //Если тема должа быть светлой
             stile_light = true;
             editor = sharedPreferences.edit();
-            editor.putString("theame","light");
+            editor.putString("theme","light");
             editor.apply();
             con.setBackgroundColor(getResources().getColor(R.color.white_back_res));
+            navigationView.setBackgroundColor(getResources().getColor(R.color.white));
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
             burger.setTextColor(getResources().getColor(R.color.text_color_light));
             avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -633,5 +641,6 @@ public class MainActivity extends AppCompatActivity {
         }
         standartArrayList();
         recyclerView.getAdapter().notifyDataSetChanged();
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 }
