@@ -37,7 +37,6 @@ public class Restaurants {
     }
 
     public String getTag2() {
-        tag2 = " "+tag2;        //Пробел, что-бы Tag1 и Tag2 не слипались
         return tag2;
     }
 

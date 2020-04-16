@@ -28,7 +28,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     class RestaurantsViewHolder extends RecyclerView.ViewHolder{
         ImageView id_img,poleIMG,walletIMG,starsIMG;
-        TextView restaurant,stars,time,tag1,tag2;
+        TextView restaurant,stars,time,tag1,tag2,min;
         RestaurantsViewHolder(View view){
             super(view);
             id_img = view.findViewById(R.id.img);
@@ -43,6 +43,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             poleIMG = view.findViewById(R.id.imageView);
             walletIMG = view.findViewById(R.id.imageView4);
             starsIMG = view.findViewById(R.id.starsIMG);
+            min = view.findViewById(R.id.min);
         }
     }
 
@@ -69,6 +70,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             holder.poleIMG.setBackgroundResource(R.color.white);
             holder.starsIMG.setBackgroundResource(R.drawable.star);
             holder.poleIMG.setBackgroundResource(R.color.white);
+            holder.min.setTextColor(Color.argb(255,0,0,0));
             switch (restaurants.get(position).getCost()) {
                 case 1:
                     cost1.setBackgroundResource(R.drawable.ruble_yes);
@@ -95,6 +97,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             holder.walletIMG.setBackgroundResource(R.drawable.wallet_light);
             holder.poleIMG.setBackgroundResource(R.color.dark_up_back);
             holder.starsIMG.setBackgroundResource(R.drawable.star_light);
+            holder.min.setTextColor(Color.argb(255,179,179,179));
             switch (restaurants.get(position).getCost()) {
                 case 1:
                     cost1.setBackgroundResource(R.drawable.ruble_yes_light);
@@ -153,10 +156,10 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
            holder.restaurant.setText(restaurants.get(position).getRestaurant());
            holder.tag1.setText(restaurants.get(position).getTag1());
 
-           if (restaurants.get(position).getTag2().equals(" none")){
+           if (restaurants.get(position).getTag2().equals("none")){
                holder.tag2.setVisibility(View.INVISIBLE);
            }else{
-               holder.tag2.setText(restaurants.get(position).getTag2());
+               holder.tag2.setText(" "+restaurants.get(position).getTag2());
            }
        }
 

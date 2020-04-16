@@ -7,6 +7,10 @@
     <color name="white_back">#E4E4E4</color>
     <color name="dark">#000000</color>
     <color name="grey">#777777</color>
+    <color name="blue">#0019FF</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF0A</color>
+    <color name="yellow">#E8FF00</color>
     <color name="grey_white">#BFBFBF</color>
     <color name="white_back_res">#F0F0EC</color>
     ----------Для смены тем--------------

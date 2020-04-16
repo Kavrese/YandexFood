@@ -2,6 +2,7 @@ package com.example.yandex_food;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,18 +19,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static android.media.CamcorderProfile.get;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     private boolean stile_light = true;
     int clickA = 0,clickB = 0,clickC = 0,clickG = 0,clickP = 0,clickR = 0,clickI = 0,clickS = 0,clickCh = 0; //Счётчики кликов у кнопок в ScrollView
     RecyclerView recyclerView;
     ImageView open_menu,search;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    SwipeRefreshLayout swipeRefreshLayout;
     DrawerLayout drawerLayout;
     ConstraintLayout con,con2;
     MenuItem user,comment,info,men,exit,color;
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         avtor = findViewById(R.id.avtor);
         chicken = findViewById(R.id.chicken);
         sushi = findViewById(R.id.sushi);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         restaurantsAdapter = new RestaurantsAdapter(arrayList);
@@ -113,7 +118,19 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        Toast.makeText(this,sharedPreferences.getString("theme","error"), Toast.LENGTH_SHORT).show();
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.red,R.color.yellow,R.color.green,R.color.blue);
+    }
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Отменяем анимацию обновления
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 1500);
     }
     public void onOpenDrawer (View view){
         drawerLayout.openDrawer(GravityCompat.START);
@@ -423,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
                 clickCh = 0;
                 clickS = 0;
                 break;
-            case "clickA":
+                case "clickA":
                 clickI = 0;
                 clickA++;
                 clickB = 0;
@@ -577,6 +594,8 @@ public class MainActivity extends AppCompatActivity {
                 arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
                 arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
                 break;
+            default:
+                standartArrayList();
         }
 
     }
@@ -644,102 +663,100 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.getAdapter().notifyDataSetChanged();
         drawerLayout.closeDrawer(GravityCompat.START);
     }
-    public boolean clickArrayList (){
+    public boolean clickArrayList () {
         boolean bool = false;
-        if(stile_light){
-            if (clickA == 1) {
-                addNewArrayList(avtor);
-                avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
+        if (stile_light) {
+                 if (clickA == 1) {
+                     addNewArrayList(avtor);
+                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                     bool = true;
+                  }
+                if (clickB == 1) {
+                    addNewArrayList(burger);
+                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickCh == 1) {
+                    addNewArrayList(chicken);
+                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickC == 1) {
+                    addNewArrayList(children);
+                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickP == 1) {
+                    addNewArrayList(pizza);
+                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickS == 1) {
+                    addNewArrayList(sushi);
+                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickG == 1) {
+                    addNewArrayList(great_food);
+                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickR == 1) {
+                    addNewArrayList(russian);
+                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickI == 1) {
+                    addNewArrayList(italian);
+                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickA == 1) {
+                    addNewArrayList(avtor);
+                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickB == 1) {
+                    addNewArrayList(burger);
+                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickCh == 1) {
+                    addNewArrayList(chicken);
+                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickC == 1) {
+                    addNewArrayList(children);
+                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickP == 1) {
+                    addNewArrayList(pizza);
+                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickS == 1) {
+                    addNewArrayList(sushi);
+                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickG == 1) {
+                    addNewArrayList(great_food);
+                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickR == 1) {
+                    addNewArrayList(russian);
+                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
+                if (clickI == 1) {
+                    addNewArrayList(italian);
+                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+                    bool = true;
+                }
             }
-            if (clickB == 1) {
-                addNewArrayList(burger);
-                burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickCh == 1) {
-                addNewArrayList(chicken);
-                chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickC == 1) {
-                addNewArrayList(children);
-                children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickP == 1) {
-                addNewArrayList(pizza);
-                pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickS == 1) {
-                addNewArrayList(sushi);
-                pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickG == 1) {
-                addNewArrayList(great_food);
-                great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickR == 1) {
-                addNewArrayList(russian);
-                russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickI == 1) {
-                addNewArrayList(italian);
-                italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-        }else{
-            if (clickA == 1) {
-                addNewArrayList(avtor);
-                avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickB == 1) {
-                addNewArrayList(burger);
-                burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickCh == 1) {
-                addNewArrayList(chicken);
-                chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickC == 1) {
-                addNewArrayList(children);
-                children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickP == 1) {
-                addNewArrayList(pizza);
-                pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickS == 1) {
-                addNewArrayList(sushi);
-                pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickG == 1) {
-                addNewArrayList(great_food);
-                great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickR == 1) {
-                addNewArrayList(russian);
-                russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
-            if (clickI == 1) {
-                addNewArrayList(italian);
-                italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                bool = true;
-            }
+            return bool;
         }
-        return bool;
     }
-
-}

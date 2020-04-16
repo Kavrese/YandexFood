@@ -10,10 +10,11 @@
     tools:showIn="@layout/app_bar_main">
 
     <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/swipeRefreshLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,6 +48,7 @@
                 android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_pizza" />
+
             <View
                 android:id="@+id/view20"
                 android:layout_width="10dp"
@@ -61,6 +63,7 @@
                 android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/scr_chicken" />
+
             <View
                 android:id="@+id/view21"
                 android:layout_width="10dp"
@@ -75,6 +78,7 @@
                 android:background="@drawable/maket_button_in_scroll_view_no_light"
                 android:onClick="onClickScrollView"
                 android:text="@string/src_sushi" />
+
             <View
                 android:id="@+id/view2"
                 android:layout_width="10dp"
@@ -152,15 +156,25 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="635dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="635dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
