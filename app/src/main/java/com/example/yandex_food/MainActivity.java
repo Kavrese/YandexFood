@@ -120,7 +120,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         });
 
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.red,R.color.yellow,R.color.green,R.color.blue);
+        swipeRefreshLayout.setColorSchemeResources(R.color.blue_dark,R.color.white_back);
+
     }
     @Override
     public void onRefresh() {
@@ -608,6 +609,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             editor = sharedPreferences.edit();
             editor.putString("theme","dark");
             editor.apply();
+            swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.dark_up_back));
             con.setBackgroundColor(getResources().getColor(R.color.dark));
             navigationView.setBackgroundColor(getResources().getColor(R.color.dark_up_back2));
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -634,6 +636,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             editor = sharedPreferences.edit();
             editor.putString("theme","light");
             editor.apply();
+            swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.white));
             con.setBackgroundColor(getResources().getColor(R.color.white_back_res));
             navigationView.setBackgroundColor(getResources().getColor(R.color.white));
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
