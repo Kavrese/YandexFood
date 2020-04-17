@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер сервера
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Проверка наличия разрешений
-            // Если нет разрешения на использование соответсвующих разркешений выполняем какие-то действия
             return;
         }
         onRebootLocation();     //Первое определение геолокации
@@ -164,19 +163,19 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         });
     //Настраиваем swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(this);//Включаем слушатель
-        swipeRefreshLayout.setColorSchemeResources(R.color.blue_dark, R.color.white_back);      //Устанавливаем цвета анимации обновления
+        swipeRefreshLayout.setColorSchemeResources(R.color.blue_dark);      //Устанавливаем цвета анимации обновления
     }
 
     @Override       //При обнавлении
     public void onRefresh() {
+        found.setText("Загрузка..."); //В это время происходит обнавлене геолокации
+        onRebootLocation();//Метод обнавления геолокации
         new Handler().postDelayed(new Runnable() {  //Запускаем таймер на 1,5 секунд
             @Override
             public void run() {
-                found.setText("Загрузка..."); //В это время происходит обнавлене геолокации
-                onRebootLocation();//Метод обнавления геолокации
                 swipeRefreshLayout.setRefreshing(false);// Отменяем анимацию обновления
             }
-        }, 1500);
+        }, 2000);
     }
 
     public void onOpenDrawer(View view) {  //Клик на кнопку, открывающяя боковую панель, в Toolbar
@@ -198,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 return;
             }
             manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);//Запрашиваем координаты
-            new Handler().postDelayed(new Runnable() {  //Запускаем таймер на 20 сек. За это время должно произойти обновление геолокации
+        new Handler().postDelayed(new Runnable() {  //Запускаем таймер на 20 сек. За это время должно произойти обновление геолокации
                 @Override
                 public void run() {
                     if (found.getText().equals("Загрузка...")) //Проверяем завершилась ли обновление
