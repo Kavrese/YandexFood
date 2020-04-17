@@ -1,6 +1,13 @@
 package com.example.yandex_food;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -14,6 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,27 +34,51 @@ import java.util.Random;
 
 import static android.media.CamcorderProfile.get;
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private boolean stile_light = true;
-    int clickA = 0,clickB = 0,clickC = 0,clickG = 0,clickP = 0,clickR = 0,clickI = 0,clickS = 0,clickCh = 0; //Счётчики кликов у кнопок в ScrollView
+    //Счётчики кликов по кнопке в ScrollView.   Кнопка:
+    //Авторская     Бургеры     Для детей   Здоровая еда    Пицца    Русская    Итальянская     Суши      Курица
+    int clickA = 0, clickB = 0, clickC = 0, clickG = 0, clickP = 0, clickR = 0, clickI = 0, clickS = 0, clickCh = 0; //Счётчики кликов у кнопок в ScrollView
     RecyclerView recyclerView;
-    ImageView open_menu,search;
+    ImageView open_menu, search;
+    String x, y;
+    LocationManager manager;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     SwipeRefreshLayout swipeRefreshLayout;
     DrawerLayout drawerLayout;
-    ConstraintLayout con,con2;
-    MenuItem user,comment,info,men,exit,color;
+    ConstraintLayout con;
     TextView found;
-    Button burger,children,russian,italian,pizza,great_food,avtor,chicken,sushi;
-    ArrayList<Restaurants> arrayList = new ArrayList<>();
-    RestaurantsAdapter restaurantsAdapter ;
+    Button burger, children, russian, italian, pizza, great_food, avtor, chicken, sushi;
+    ArrayList<Restaurants> arrayList = new ArrayList<>();       //Данные для RecyclerView
+    RestaurantsAdapter restaurantsAdapter;
     NavigationView navigationView;
+    private LocationListener listener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {      //При обновлении
+            y = (String.valueOf(location.getLongitude()));      //Определяем долготу
+            x = (String.valueOf(location.getLatitude()));       //Определяем широту
+            found.setText("Широта: " + x + "\nДолгота: " + y);  //Соединяем
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sharedPreferences = getSharedPreferences("0",0);
+        sharedPreferences = getSharedPreferences("0", 0);
         con = findViewById(R.id.con);
         navigationView = findViewById(R.id.nav_view);
         search = findViewById(R.id.search);
@@ -65,34 +97,46 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         sushi = findViewById(R.id.sushi);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
+        //Подготовка к определению геолокации
+        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер сервера
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Проверка наличия разрешений
+            // Если нет разрешения на использование соответсвующих разркешений выполняем какие-то действия
+            return;
+        }
+        onRebootLocation();     //Первое определение геолокации
+
+        //Запускаем RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        restaurantsAdapter = new RestaurantsAdapter(arrayList);
-        recyclerView.setAdapter(restaurantsAdapter);
-        if(sharedPreferences.getString("theme","first").equals("first")) {
+        restaurantsAdapter = new RestaurantsAdapter(arrayList);         //Создаём адаптер
+        recyclerView.setAdapter(restaurantsAdapter);              //Присоединяем адаптер
+
+        if (sharedPreferences.getString("theme", "first").equals("first")) { //Если приложение было запущенно в первый раз, то автоматически ставим светлую тему
             stile_light = true;
             editor = sharedPreferences.edit();
-            editor.putString("theme","light");
+            editor.putString("theme", "light");     //По стандарту, при первом запуске светлая тема
             editor.apply();
-        }else{
-            switch (sharedPreferences.getString("theme","first")){
+        } else {
+            switch (sharedPreferences.getString("theme", "first")) {    //Если предыдущяя темы была тёмной изменяем boolean (т.к. по стандарту стоит true) и вызываем метод смены тем
                 case "dark":
                     stile_light = false;
-                    onSwithStile("dark");
+                    onSwithStile("dark"); //Метод смены тем
                     break;
-                case "first":
-                    Toast.makeText(getApplicationContext(),"Error First",Toast.LENGTH_SHORT).show();
+                case "first":       //Это в принцыпе не возможно, но на всякий случай
+                    Toast.makeText(getApplicationContext(), "Error First", Toast.LENGTH_SHORT).show();
                     break;
             }
-            standartArrayList();
+            standartArrayList();    //Вызываем метод что-бы заполнить RecyclerView стандартными карточками
         }
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {    //Клики по боковой панели
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.nav_enter:
+                    case R.id.nav_enter:    //При клике на item Войти выводим Toast
                         Toast.makeText(MainActivity.this, "Вы нажали на Войти", Toast.LENGTH_SHORT).show();
                         break;
+                        //Дальше так-же
                     case R.id.nav_support:
                         Toast.makeText(MainActivity.this, "Вы нажали на Связаться с нами", Toast.LENGTH_SHORT).show();
                         break;
@@ -103,10 +147,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         Toast.makeText(MainActivity.this, "Вы нажали на О сервисе ", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_stile:
-                        if(stile_light) {
+                        if (stile_light) {
                             Toast.makeText(MainActivity.this, "Изменение темы на тёмную", Toast.LENGTH_SHORT).show();
                             onSwithStile("dark");
-                        }else{
+                        } else {
                             onSwithStile("light");
                             Toast.makeText(MainActivity.this, "Изменение темы на светлую", Toast.LENGTH_SHORT).show();
                         }
@@ -118,47 +162,75 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 return false;
             }
         });
-
-        swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.blue_dark,R.color.white_back);
-
+    //Настраиваем swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(this);//Включаем слушатель
+        swipeRefreshLayout.setColorSchemeResources(R.color.blue_dark, R.color.white_back);      //Устанавливаем цвета анимации обновления
     }
-    @Override
+
+    @Override       //При обнавлении
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {  //Запускаем таймер на 1,5 секунд
             @Override
             public void run() {
-                // Отменяем анимацию обновления
-                swipeRefreshLayout.setRefreshing(false);
+                found.setText("Загрузка..."); //В это время происходит обнавлене геолокации
+                onRebootLocation();//Метод обнавления геолокации
+                swipeRefreshLayout.setRefreshing(false);// Отменяем анимацию обновления
             }
         }, 1500);
     }
-    public void onOpenDrawer (View view){
+
+    public void onOpenDrawer(View view) {  //Клик на кнопку, открывающяя боковую панель, в Toolbar
         drawerLayout.openDrawer(GravityCompat.START);
     }
-    public void onSearch (View view){
+
+    public void onSearch(View view) {    //Клик на кнопку поиска в ToolBar
         Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
     }
 
-    public void onClickScrollView (View view){
-        arrayList.clear();
+    public void onRebootLocation() {
+        boolean inet = isNetworkConnected();
+        //Проверка подключенны ли к сети
+        if (inet == false) {
+            found.setText("Подключитесь к сети");
+        } else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                //Проверка разрешений
+                return;
+            }
+            manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);//Запрашиваем координаты
+            new Handler().postDelayed(new Runnable() {  //Запускаем таймер на 20 сек. За это время должно произойти обновление геолокации
+                @Override
+                public void run() {
+                    if (found.getText().equals("Загрузка...")) //Проверяем завершилась ли обновление
+                        found.setText("Ошибка");    //Если за это время не произошло оновление, то ввыводим ошибку, но не прекращяем обновлять
+                }
+            }, 20000);
+        }
+    }
+    private boolean isNetworkConnected() {//Метод проверки интернета
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+    public void onClickScrollView (View view){  //При клике на кнопки в ScrollView
+        arrayList.clear();  //Очищяем лист для адаптера RecyclerView
         switch (view.getId()){
-            case R.id.italian:
+            case R.id.italian:      //Нажатие на кнопку Итальянская
                 editClick("clickI");
-                if(stile_light) {
-                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
-                    if (clickI >= 2){
+                if(stile_light) {   //При светлой теме
+                    //Меняем макеты кнопок на неактивный, кроме нажатой кнопки
+                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);   //Не активный макет
+                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);  //Не активный макет
+                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);   //Не активный макет
+                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light); //Не активный макет
+                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);//Не активный макет
+                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);//Не активный макет
+                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);      //Акивный макет
+                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light); //Не активный макет
+                    sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);   //Не активный макет
+                    if (clickI >= 2){       //Если счетчик больше или равен 2, то делаем кнопку не активной
                         italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
                     }
-                }else{
+                }else{      //При тёмной, тот же принцып
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -173,7 +245,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 }
                 break;
-            case R.id.avtor:
+                //Остальные по таму-же принцыпу
+            case R.id.avtor:        //Нажатие на кнопку Авторская
                 editClick("clickA");
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
@@ -203,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 }
                 break;
-            case R.id.burger:
+            case R.id.burger:           //Нажатие на кнопку Бургеры
                 editClick("clickB");
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -233,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 }
                 break;
-            case R.id.pizza:
+            case R.id.pizza:        //Нажатие на кнопку Пицца
                 editClick("clickP");
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -263,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 }
                 break;
-            case R.id.russian:
+            case R.id.russian:      //Нажатие на кнопку Русская
                 editClick("clickR");
                 if(stile_light) {
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -294,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
                 break;
 
-            case R.id.children:
+            case R.id.children:         //Нажатие на кнопку Для Детей
                 editClick("clickC");
                 if(stile_light){
                 avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -324,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                     }
                 break;
-            case R.id.great_food:
+            case R.id.great_food:           //Нажатие на кнопку здоровая еда
                 editClick("clickG");
                 if(stile_light){
                 avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -356,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                 break;
 
-            case R.id.chicken:
+            case R.id.chicken:              //Нажатие на кнопку Курица
                 editClick("clickCh");
                 if(stile_light){
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -387,7 +460,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
                 break;
 
-            case R.id.sushi:
+            case R.id.sushi:            //Нажатие на кнопку Суши
                 editClick("clickS");
                 if(stile_light){
                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
@@ -419,28 +492,29 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 break;
         }
         if((clickI == 1)|| (clickS == 1) || (clickCh == 1) || (clickA == 1) || (clickG == 1) || (clickB == 1) || (clickR == 1) || (clickP == 1) || (clickC == 1)){
-            addNewArrayList(view);
-            recyclerView.getAdapter().notifyDataSetChanged();
+            addNewArrayList(view);// При 1 клике на любую кнопку, вызываем метод изменения данных с нажатой view
+            recyclerView.getAdapter().notifyDataSetChanged(); //Обновляем Адаптер новыми данными
         }
         if((clickI == 2)|| (clickS == 2) || (clickCh == 2) || (clickA == 2) || (clickG == 2) || (clickB == 2) || (clickR == 2) || (clickP == 2) || (clickC == 2)){
-            standartArrayList();
+            standartArrayList();// Если происходить 2 клика на любую кнопку, то применяем стандартные данные (т.е. возращяемся к тому, что было)
             recyclerView.getAdapter().notifyDataSetChanged();
         }
     }
 
-    public void editClick (String click){
+    public void editClick (String click){       //Принимает комманду и по этой комманде +1 в счётчик, при этом обнуляет другие счётчики
         switch (click){
-            case "clickI":
-                clickI++;
-                clickA = 0;
-                clickB = 0;
-                clickP = 0;
-                clickC = 0;
-                clickG = 0;
-                clickR = 0;
-                clickCh = 0;
-                clickS = 0;
+            case "clickI":      // Комманда "clickI"
+                clickI++;       // +1 в счётчик clickI
+                clickA = 0;     //*
+                clickB = 0;     //*
+                clickP = 0;     //*
+                clickC = 0;     //Обнуляем другие счётчики
+                clickG = 0;     //*
+                clickR = 0;     //*
+                clickCh = 0;    //*
+                clickS = 0;     //*
                 break;
+                //Дальше по такому-же принцыпу
                 case "clickA":
                 clickI = 0;
                 clickA++;
@@ -529,6 +603,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 clickCh= 0;
                 clickS ++;
                 break;
+                //Единственное, при комманде "return" сбрасываем все счётчики
             case "return":
                 clickI = 0;
                 clickA = 0;
@@ -543,10 +618,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
     }
 
-    public void standartArrayList (){
-        arrayList.clear();
-        editClick("return");
+    public void standartArrayList (){   //Меняем данные на стандартные
+        arrayList.clear();       //Очищяем список
+        editClick("return");     //Очищяем счётчики
 
+        //Стандартные наборы данных
         arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
         arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
         arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
@@ -559,13 +635,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         arrayList.add(new Restaurants(10, "~70", 2, 4.0f, "KFC","Курица","none",stile_light));
     }
 
-    public void addNewArrayList (View view){
-        arrayList.clear();
+    public void addNewArrayList (View view){    //Изменяем данные взависимости от нажатой кнопки в ScrollView
+        arrayList.clear();//Сбрасываем Лист
         switch (view.getId()){
-            case R.id.avtor:
+            case R.id.avtor: // Добавляем данные при нажатой кнопке Авторская в ScroolView
                 arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
                 arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
                 break;
+                //Дальше по такому-же принцыпу
             case R.id.great_food:
                 arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
                 break;
@@ -595,23 +672,22 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
                 arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
                 break;
-            default:
+            default:    //На всякий случай
                 standartArrayList();
         }
 
     }
 
-    public void onSwithStile (String theme){
-        con2 = findViewById(R.id.con2);
-        if (theme.equals("dark")){   //Если должна быть тёмной
-            con2 = findViewById(R.id.con2);
+    public void onSwithStile (String theme){    //Метод изменения тем
+        if (theme.equals("dark")){              //Если тема должна быть тёмной
             stile_light = false;
-            editor = sharedPreferences.edit();
-            editor.putString("theme","dark");
-            editor.apply();
-            swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.dark_up_back));
-            con.setBackgroundColor(getResources().getColor(R.color.dark));
-            navigationView.setBackgroundColor(getResources().getColor(R.color.dark_up_back2));
+            editor = sharedPreferences.edit();  //
+            editor.putString("theme","dark");   //  Заносим измененние темы в sharedPreferences
+            editor.apply();                     //
+            swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.dark_up_back)); // Меняем задний фон анимации обновления
+            con.setBackgroundColor(getResources().getColor(R.color.dark));      //Изменяем цвет заднего фона
+            navigationView.setBackgroundColor(getResources().getColor(R.color.dark_up_back2));     //Изменяет цвет бокового меню
+            //Меняем макет и текст кнопок в ScrollView
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
             burger.setTextColor(getResources().getColor(R.color.text_color_dark));
             avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -631,6 +707,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             sushi.setTextColor(getResources().getColor(R.color.text_color_dark));
             sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
         }
+        //Дальше по такому-же принцыпу
         if(theme.equals("light")){      //Если тема должа быть светлой
             stile_light = true;
             editor = sharedPreferences.edit();
@@ -659,21 +736,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light
             );
         }
+        //Если нажата хоть одна кнопка, в ScrollVIew - не меняем данные
         boolean bool = clickArrayList();
         if(!bool){
             standartArrayList();
         }
-        recyclerView.getAdapter().notifyDataSetChanged();
-        drawerLayout.closeDrawer(GravityCompat.START);
+        recyclerView.getAdapter().notifyDataSetChanged();   //Не помню почему эта строчка здесь
+        drawerLayout.closeDrawer(GravityCompat.START);      //Закрываем боковое окно при смене темы
     }
-    public boolean clickArrayList () {
-        boolean bool = false;
-        if (stile_light) {
-                 if (clickA == 1) {
-                     addNewArrayList(avtor);
-                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
+    public boolean clickArrayList () {      //Метод, который меняет данные взависимости от нажатой кнопки и меняет скин этой кнопки
+        boolean bool = false;   //Если есть нажатай кнопка - true
+
+                 if (clickA == 1) {     //Нажата кнопка Авторская
+                     addNewArrayList(avtor);    //Меняем данные
+                     avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);//Меняем скин
                      bool = true;
                   }
+                 //Дальше по такому-же ппринцыпу
                 if (clickB == 1) {
                     addNewArrayList(burger);
                     burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
@@ -714,52 +793,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
                     bool = true;
                 }
-                if (clickA == 1) {
-                    addNewArrayList(avtor);
-                    avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-                if (clickB == 1) {
-                    addNewArrayList(burger);
-                    burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-                if (clickCh == 1) {
-                    addNewArrayList(chicken);
-                    chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-                if (clickC == 1) {
-                    addNewArrayList(children);
-                    children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-                if (clickP == 1) {
-                    addNewArrayList(pizza);
-                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-                if (clickS == 1) {
-                    addNewArrayList(sushi);
-                    pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-                if (clickG == 1) {
-                    addNewArrayList(great_food);
-                    great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-                if (clickR == 1) {
-                    addNewArrayList(russian);
-                    russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-                if (clickI == 1) {
-                    addNewArrayList(italian);
-                    italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_yes);
-                    bool = true;
-                }
-            }
-            return bool;
+            return bool;        //Возращяем boolean (true - была нажата любая кнопка)
         }
+
+
     }

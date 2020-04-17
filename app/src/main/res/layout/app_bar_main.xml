@@ -36,7 +36,7 @@
                 android:layout_weight="16"
                 android:background="@drawable/found_maket_light"
                 android:gravity="center"
-                android:text="Ваш адресс"
+                android:text="Загрузка..."
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
