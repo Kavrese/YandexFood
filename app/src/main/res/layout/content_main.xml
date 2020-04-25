@@ -18,13 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleMargin="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:weightSum="20"
+            android:weightSum="24"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
@@ -32,15 +33,16 @@
 
             <ImageView
                 android:id="@+id/menuopen"
-                android:layout_width="40dp"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="4"
                 android:onClick="onOpenDrawer"
-                android:src="@drawable/openmenu"></ImageView>
+                android:src="@drawable/openmenu">
+            </ImageView>
 
             <TextView
                 android:id="@+id/found"
-                android:layout_width="260dp"
+                android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="16"
                 android:background="@drawable/found_maket_light"
@@ -77,6 +79,21 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/setting"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:background="@drawable/maket_button_in_scroll_view_no_light_setting"
+                android:onClick="onClickScrollView"
+                android:scaleType="fitCenter"
+                android:src="@drawable/setting"></ImageButton>
+
+            <View
+                android:id="@+id/view0"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/burger"

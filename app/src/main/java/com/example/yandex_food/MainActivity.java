@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     ConstraintLayout con;
     TextView found, text;
     Button burger, children, russian, italian, pizza, great_food, avtor, chicken, sushi;
+    ImageButton setting;
     ArrayList<Restaurants> arrayList = new ArrayList<>();       //Данные для RecyclerView
     RestaurantsAdapter restaurantsAdapter;
     NavigationView navigationView;
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 scroll2.fullScroll(ScrollView.FOCUS_UP);
             }
         });
-        new Handler().postDelayed(new Runnable() {  //Через 0.5 секунд приложение должно точно всё прогрузить
+        new Handler().postDelayed(new Runnable() {  //Через 1 секунд приложение должно точно всё прогрузить
             @Override
             public void run() {
                 start = false;
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         open_menu = findViewById(R.id.menuopen);
         drawerLayout = findViewById(R.id.drawer_layout);
         found = findViewById(R.id.found);
+        setting = findViewById(R.id.setting);
         burger = findViewById(R.id.burger);
         children = findViewById(R.id.children);
         russian = findViewById(R.id.russian);
@@ -295,6 +298,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onClickScrollView (View view){  //При клике на кнопки в ScrollView
         arrayList.clear();  //Очищяем лист для адаптера RecyclerView
         switch (view.getId()){
+            case R.id.setting:
+                Toast.makeText(this, "Что-то происходит", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.italian:      //Нажатие на кнопку Итальянская
                 editClick("clickI");
                 if(stile_light) {   //При светлой теме
@@ -771,6 +777,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             con.setBackgroundColor(getResources().getColor(R.color.dark));      //Изменяем цвет заднего фона
             navigationView.setBackgroundColor(getResources().getColor(R.color.dark_up_back2));     //Изменяет цвет бокового меню
             //Меняем макет и текст кнопок в ScrollView
+            setting.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark_setting);
+            setting.setImageResource(R.drawable.setting_light);
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
             burger.setTextColor(getResources().getColor(R.color.text_color_dark));
             avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
@@ -800,6 +808,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             swipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.white));
             con.setBackgroundColor(getResources().getColor(R.color.white_back_res));
             navigationView.setBackgroundColor(getResources().getColor(R.color.white));
+            setting.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light_setting);
+            setting.setImageResource(R.drawable.setting);
             burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
             burger.setTextColor(getResources().getColor(R.color.text_color_light));
             avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
