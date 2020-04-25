@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         recyclerView = findViewById(R.id.recyclerView);
         open_menu = findViewById(R.id.menuopen);
         drawerLayout = findViewById(R.id.drawer_layout);
-        found = findViewById(R.id.foundtext);
+        found = findViewById(R.id.found);
         burger = findViewById(R.id.burger);
         children = findViewById(R.id.children);
         russian = findViewById(R.id.russian);
@@ -190,13 +190,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 });
             }
         });
-        checkPer();
+        checkPer(); //Проверяем разрешение методом
     }
     public void checkPer (){
+        //Проверка разрешения
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //Разрешения нет - запрашиваем
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
         }else {
-            per = true;
+            per = true;                    //Говорим что разрешение есть
             onRebootLocation();          //Определение геолокации
         }
     }
@@ -218,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onRefresh() {
         checkPer();
         if(per) {
-            found.setText("Загрузка..."); //В это время происходит обнавлене геолокации
+            found.setText("Загрузка"); //В это время происходит обнавлене геолокации
             onRebootLocation();//Метод обнавления геолокации
         }else{
             found.setText("Предоставьте разрешение на геолокацию");
@@ -272,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             if (!per) {
                                 found.setText("Предоставте разрешение на геолокацию");
                             }
-                            if (found.getText().equals("Загрузка...")) //Проверяем завершилась ли обновление
+                            if (found.getText().equals("Загрузка")) //Проверяем завершилась ли обновление
                                 found.setText("Ошибка");    //Если за это время не произошло оновление, то ввыводим ошибку, но не прекращяем обновлять
                         }
                     }, 20000);
@@ -286,8 +288,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     public boolean isGPSConnected() {   ////Метод проверки GPS
-    LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-    boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    boolean enabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     return enabled;
 }
 
