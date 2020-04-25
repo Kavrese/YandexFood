@@ -1,7 +1,9 @@
 package com.example.yandex_food;
 
 import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -13,13 +15,16 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
@@ -30,25 +35,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
-import java.util.Random;
-
-import static android.media.CamcorderProfile.get;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private boolean stile_light = true;
+    private boolean start = true;
+    private boolean other_button = false;
+    private boolean per = false;
     //Счётчики кликов по кнопке в ScrollView.   Кнопка:
     //Авторская     Бургеры     Для детей   Здоровая еда    Пицца    Русская    Итальянская     Суши      Курица
     int clickA = 0, clickB = 0, clickC = 0, clickG = 0, clickP = 0, clickR = 0, clickI = 0, clickS = 0, clickCh = 0; //Счётчики кликов у кнопок в ScrollView
     RecyclerView recyclerView;
-    ImageView open_menu, search;
-    String x, y;
+    ImageView open_menu, search;    //Кнопки Toolbar'а
+    ImageView cardURL;
+    String x, y;    //Для геолокации
     LocationManager manager;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     SwipeRefreshLayout swipeRefreshLayout;
     DrawerLayout drawerLayout;
+    ScrollView scroll2;
+    HorizontalScrollView scrollCard;
     ConstraintLayout con;
-    TextView found;
+    TextView found, text;
     Button burger, children, russian, italian, pizza, great_food, avtor, chicken, sushi;
     ArrayList<Restaurants> arrayList = new ArrayList<>();       //Данные для RecyclerView
     RestaurantsAdapter restaurantsAdapter;
@@ -79,6 +87,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences("0", 0);
+        scroll2 = findViewById(R.id.scroll2);
+        scrollCard = findViewById(R.id.scrollCard);
+        scroll2.post(new Runnable() {   //Скролим SrollView до самого начала
+            @Override
+            public void run() {
+                scroll2.fullScroll(ScrollView.FOCUS_UP);
+            }
+        });
+        new Handler().postDelayed(new Runnable() {  //Через 0.5 секунд приложение должно точно всё прогрузить
+            @Override
+            public void run() {
+                start = false;
+            }
+        }, 1000);
+        text = findViewById(R.id.text);
         con = findViewById(R.id.con);
         navigationView = findViewById(R.id.nav_view);
         search = findViewById(R.id.search);
@@ -96,37 +119,26 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         chicken = findViewById(R.id.chicken);
         sushi = findViewById(R.id.sushi);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-
+        cardURL = findViewById(R.id.URL);
         //Подготовка к определению геолокации
         manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); //Менеджер сервера
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Проверка наличия разрешений
-            return;
-        }
-        onRebootLocation();     //Первое определение геолокации
-
         //Запускаем RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         restaurantsAdapter = new RestaurantsAdapter(arrayList);         //Создаём адаптер
         recyclerView.setAdapter(restaurantsAdapter);              //Присоединяем адаптер
+        standartArrayList();    //Вызываем метод что-бы заполнить RecyclerView стандартными карточками
 
-        if (sharedPreferences.getString("theme", "first").equals("first")) { //Если приложение было запущенно в первый раз, то автоматически ставим светлую тему
-            stile_light = true;
-            editor = sharedPreferences.edit();
-            editor.putString("theme", "light");     //По стандарту, при первом запуске светлая тема
-            editor.apply();
-        } else {
-            switch (sharedPreferences.getString("theme", "first")) {    //Если предыдущяя темы была тёмной изменяем boolean (т.к. по стандарту стоит true) и вызываем метод смены тем
+            switch (sharedPreferences.getString("theme", "light")) {    //Если предыдущяя темы была тёмной изменяем boolean (т.к. по стандарту стоит true) и вызываем метод смены тем
                 case "dark":
                     stile_light = false;
                     onSwithStile("dark"); //Метод смены тем
                     break;
-                case "first":       //Это в принцыпе не возможно, но на всякий случай
-                    Toast.makeText(getApplicationContext(), "Error First", Toast.LENGTH_SHORT).show();
+                case "light":
+                    stile_light = true;
+                    onSwithStile("light"); //Метод смены тем
                     break;
             }
-            standartArrayList();    //Вызываем метод что-бы заполнить RecyclerView стандартными карточками
-        }
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {    //Клики по боковой панели
             @Override
@@ -135,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     case R.id.nav_enter:    //При клике на item Войти выводим Toast
                         Toast.makeText(MainActivity.this, "Вы нажали на Войти", Toast.LENGTH_SHORT).show();
                         break;
-                        //Дальше так-же
+                    //Дальше так-же
                     case R.id.nav_support:
                         Toast.makeText(MainActivity.this, "Вы нажали на Связаться с нами", Toast.LENGTH_SHORT).show();
                         break;
@@ -161,15 +173,56 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 return false;
             }
         });
-    //Настраиваем swipeRefreshLayout
+        //Настраиваем swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(this);//Включаем слушатель
         swipeRefreshLayout.setColorSchemeResources(R.color.blue_dark);      //Устанавливаем цвета анимации обновления
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {  //При прокрутке RecyclerView убирает остальные элементы в ScrollView
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                scroll2.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!start && !other_button) //Если приложение все прогрузило и не нажата ни одна кнопка, то при скролинге RecyclerView убираем SrollView
+                            scroll2.fullScroll(ScrollView.FOCUS_DOWN);
+                    }
+                });
+            }
+        });
+        checkPer();
+    }
+    public void checkPer (){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }else {
+            per = true;
+            onRebootLocation();          //Определение геолокации
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    onRebootLocation(); //Первое определение геолокации
+                } else {
+                    found.setText("Предоставьте разрешение на геолокацию");
+                    per = false;
+                }
+        }
     }
 
     @Override       //При обнавлении
     public void onRefresh() {
-        found.setText("Загрузка..."); //В это время происходит обнавлене геолокации
-        onRebootLocation();//Метод обнавления геолокации
+        checkPer();
+        if(per) {
+            found.setText("Загрузка..."); //В это время происходит обнавлене геолокации
+            onRebootLocation();//Метод обнавления геолокации
+        }else{
+            found.setText("Предоставьте разрешение на геолокацию");
+        }
         new Handler().postDelayed(new Runnable() {  //Запускаем таймер на 1,5 секунд
             @Override
             public void run() {
@@ -182,34 +235,62 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
+    public void onClickHorScrollView(View view){
+        switch (view.getId()){
+            case R.id.card1:
+                Toast.makeText(this, "Доставка бесплатно", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.URL:
+                Toast.makeText(this, "Поддержи любимые рестораны на карантине", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
     public void onSearch(View view) {    //Клик на кнопку поиска в ToolBar
         Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
     }
 
     public void onRebootLocation() {
-        boolean inet = isNetworkConnected();
+        boolean inet = isNetworkConnected();    //Проверка включён ли Интернет
+        boolean gps = isGPSConnected();         //Проверка включён ли GPS
         //Проверка подключенны ли к сети
-        if (inet == false) {
+        if (!inet) {
             found.setText("Подключитесь к сети");
-        } else {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                //Проверка разрешений
-                return;
-            }
-            manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);//Запрашиваем координаты
-        new Handler().postDelayed(new Runnable() {  //Запускаем таймер на 20 сек. За это время должно произойти обновление геолокации
-                @Override
-                public void run() {
-                    if (found.getText().equals("Загрузка...")) //Проверяем завершилась ли обновление
-                        found.setText("Ошибка");    //Если за это время не произошло оновление, то ввыводим ошибку, но не прекращяем обновлять
+        }else {
+            if (!gps && per) {
+                found.setText("Включите геолакацию");
+            }else {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    //Проверка разрешений
+                    return;
                 }
-            }, 20000);
+                manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);//Запрашиваем координаты
+
+                    new Handler().postDelayed(new Runnable() {  //Запускаем таймер на 20 сек. За это время должно произойти обновление геолокации
+                        @Override
+                        public void run() {
+                            if (!per) {
+                                found.setText("Предоставте разрешение на геолокацию");
+                            }
+                            if (found.getText().equals("Загрузка...")) //Проверяем завершилась ли обновление
+                                found.setText("Ошибка");    //Если за это время не произошло оновление, то ввыводим ошибку, но не прекращяем обновлять
+                        }
+                    }, 20000);
+            }
         }
     }
+
     private boolean isNetworkConnected() {//Метод проверки интернета
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
+
+    public boolean isGPSConnected() {   ////Метод проверки GPS
+    LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+    boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    return enabled;
+}
+
     public void onClickScrollView (View view){  //При клике на кнопки в ScrollView
         arrayList.clear();  //Очищяем лист для адаптера RecyclerView
         switch (view.getId()){
@@ -491,10 +572,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 break;
         }
         if((clickI == 1)|| (clickS == 1) || (clickCh == 1) || (clickA == 1) || (clickG == 1) || (clickB == 1) || (clickR == 1) || (clickP == 1) || (clickC == 1)){
+            other_button = true;    //При 1 клике
             addNewArrayList(view);// При 1 клике на любую кнопку, вызываем метод изменения данных с нажатой view
             recyclerView.getAdapter().notifyDataSetChanged(); //Обновляем Адаптер новыми данными
         }
         if((clickI == 2)|| (clickS == 2) || (clickCh == 2) || (clickA == 2) || (clickG == 2) || (clickB == 2) || (clickR == 2) || (clickP == 2) || (clickC == 2)){
+            other_button = false ;  //При 2 клике
             standartArrayList();// Если происходить 2 клика на любую кнопку, то применяем стандартные данные (т.е. возращяемся к тому, что было)
             recyclerView.getAdapter().notifyDataSetChanged();
         }
@@ -705,6 +788,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
             sushi.setTextColor(getResources().getColor(R.color.text_color_dark));
             sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            text.setTextColor(getResources().getColor(R.color.white));
         }
         //Дальше по такому-же принцыпу
         if(theme.equals("light")){      //Если тема должа быть светлой
@@ -732,10 +816,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             chicken.setTextColor(getResources().getColor(R.color.text_color_light));
             chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
             sushi.setTextColor(getResources().getColor(R.color.text_color_light));
-            sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light
-            );
+            sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            text.setTextColor(getResources().getColor(R.color.dark));
         }
-        //Если нажата хоть одна кнопка, в ScrollVIew - не меняем данные
+        //Если нажата хоть одна кнопка, в ScrollVIew - не меняем данные для адаптера
         boolean bool = clickArrayList();
         if(!bool){
             standartArrayList();
@@ -794,6 +878,4 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
             return bool;        //Возращяем boolean (true - была нажата любая кнопка)
         }
-
-
     }
