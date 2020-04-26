@@ -18,10 +18,12 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -56,13 +58,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     DrawerLayout drawerLayout;
     ScrollView scroll2;
     HorizontalScrollView scrollCard;
-    ConstraintLayout con;
+    LinearLayout con,button_sheet;
     TextView found, text;
     Button burger, children, russian, italian, pizza, great_food, avtor, chicken, sushi;
     ImageButton setting;
     ArrayList<Restaurants> arrayList = new ArrayList<>();       //Данные для RecyclerView
     RestaurantsAdapter restaurantsAdapter;
     NavigationView navigationView;
+    BottomSheetBehavior bottomSheetBehavior;
     private LocationListener listener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {      //При обновлении
@@ -105,6 +108,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }, 1000);
         text = findViewById(R.id.text);
         con = findViewById(R.id.con);
+        button_sheet = findViewById(R.id.bottom_sheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(button_sheet);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         navigationView = findViewById(R.id.nav_view);
         search = findViewById(R.id.search);
         recyclerView = findViewById(R.id.recyclerView);
@@ -299,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         arrayList.clear();  //Очищяем лист для адаптера RecyclerView
         switch (view.getId()){
             case R.id.setting:
-                Toast.makeText(this, "Что-то происходит", Toast.LENGTH_SHORT).show();
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);       //Октраываем нижнюю панель
                 break;
             case R.id.italian:      //Нажатие на кнопку Итальянская
                 editClick("clickI");

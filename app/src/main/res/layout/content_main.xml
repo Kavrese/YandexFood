@@ -1,306 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/con"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white_back_res">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
+        android:id="@+id/con"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleMargin="0dp">
+        android:layout_height="match_parent"
+        android:background="@color/white_back_res"
+        android:orientation="vertical"
+        android:weightSum="100">
 
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:background="?attr/colorPrimary"
             android:gravity="center"
-            android:weightSum="24"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintEnd_toEndOf="@+id/toolbar"
-            app:layout_constraintStart_toStartOf="@+id/toolbar"
-            app:layout_constraintTop_toTopOf="@id/toolbar">
-
-            <ImageView
-                android:id="@+id/menuopen"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="4"
-                android:onClick="onOpenDrawer"
-                android:src="@drawable/openmenu">
-            </ImageView>
-
-            <TextView
-                android:id="@+id/found"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_weight="16"
-                android:background="@drawable/found_maket_light"
-                android:gravity="center"
-                android:text="Загрузка..."
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/search"
-                android:layout_width="40dp"
-                android:layout_height="28dp"
-                android:layout_weight="4"
-                android:onClick="onSearch"
-                android:src="@drawable/search">
-
-            </ImageView>
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@+id/swipeRefreshLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/setting"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:background="@drawable/maket_button_in_scroll_view_no_light_setting"
-                android:onClick="onClickScrollView"
-                android:scaleType="fitCenter"
-                android:src="@drawable/setting"></ImageButton>
-
-            <View
-                android:id="@+id/view0"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/burger"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/scr_burger" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/pizza"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/scr_pizza" />
-
-            <View
-                android:id="@+id/view20"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/chicken"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/scr_chicken" />
-
-            <View
-                android:id="@+id/view21"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/sushi"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/src_sushi" />
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/great_food"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/scr_great_food" />
-
-            <View
-                android:id="@+id/view3"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/avtor"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/scr_avtor" />
-
-            <View
-                android:id="@+id/view5"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/children"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/scr_children" />
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/italian"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/scr_italian" />
-
-            <View
-                android:id="@+id/view6"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/russian"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/maket_button_in_scroll_view_no_light"
-                android:onClick="onClickScrollView"
-                android:text="@string/scr_russian" />
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="630dp"
-        android:animationCache="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
-
-        <ScrollView
-            android:id="@+id/scroll2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:scrollbars="none">
+            app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleMargin="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="650dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:weightSum="24"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar"
+                app:layout_constraintStart_toStartOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="@id/toolbar">
 
-                <HorizontalScrollView
-                    android:id="@+id/scrollCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:scrollbars="none">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/card1"
-                            android:layout_width="255dp"
-                            android:layout_height="140dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginBottom="15dp"
-                            android:background="@drawable/card"
-                            android:onClick="onClickHorScrollView" />
-
-                        <ImageView
-                            android:id="@+id/URL"
-                            android:layout_width="255dp"
-                            android:layout_height="140dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"
-                            android:background="@drawable/card2"
-                            android:onClick="onClickHorScrollView" />
-                    </LinearLayout>
-                </HorizontalScrollView>
+                <ImageView
+                    android:id="@+id/menuopen"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="4"
+                    android:onClick="onOpenDrawer"
+                    android:src="@drawable/openmenu"></ImageView>
 
                 <TextView
-                    android:id="@+id/text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="     Рядом с вами"
+                    android:id="@+id/found"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="17"
+                    android:background="@drawable/found_maket_light"
+                    android:gravity="center"
+                    android:text="Загрузка..."
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:fontFamily="sans-serif" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="800dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+                <ImageView
+                    android:id="@+id/search"
+                    android:layout_width="40dp"
+                    android:layout_height="28dp"
+                    android:layout_weight="3"
+                    android:onClick="onSearch"
+                    android:src="@drawable/search">
 
+                </ImageView>
             </LinearLayout>
-        </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="7dp"
+            android:layout_weight="9"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@+id/swipeRefreshLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/setting"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light_setting"
+                    android:onClick="onClickScrollView"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/setting"></ImageButton>
+
+                <View
+                    android:id="@+id/view0"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/burger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/scr_burger" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/pizza"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/scr_pizza" />
+
+                <View
+                    android:id="@+id/view20"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/chicken"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/scr_chicken" />
+
+                <View
+                    android:id="@+id/view21"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/sushi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/src_sushi" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/great_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/scr_great_food" />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/avtor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/scr_avtor" />
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/children"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/scr_children" />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/italian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/scr_italian" />
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/russian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/maket_button_in_scroll_view_no_light"
+                    android:onClick="onClickScrollView"
+                    android:text="@string/scr_russian" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="83"
+            android:animationCache="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+
+            <ScrollView
+                android:id="@+id/scroll2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="650dp"
+                    android:orientation="vertical">
+
+                    <HorizontalScrollView
+                        android:id="@+id/scrollCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/card1"
+                                android:layout_width="255dp"
+                                android:layout_height="140dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:background="@drawable/card"
+                                android:onClick="onClickHorScrollView" />
+
+                            <ImageView
+                                android:id="@+id/URL"
+                                android:layout_width="255dp"
+                                android:layout_height="140dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:background="@drawable/card2"
+                                android:onClick="onClickHorScrollView" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="     Рядом с вами"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:fontFamily="sans-serif" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="800dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+    <include
+        layout="@layout/button_sheet_content">
+    </include>
+</com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
