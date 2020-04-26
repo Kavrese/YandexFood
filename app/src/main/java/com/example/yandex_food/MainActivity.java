@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
@@ -28,8 +29,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresPermission;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -45,24 +44,25 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private boolean start = true;
     private boolean other_button = false;
     private boolean per = false;
-    private boolean dawnClick = false;
+    private boolean load = true;
     //Счётчики кликов по кнопке в ScrollView.   Кнопка:
     //Авторская     Бургеры     Для детей   Здоровая еда    Пицца    Русская    Итальянская     Суши      Курица
     int clickA = 0, clickB = 0, clickC = 0, clickG = 0, clickP = 0, clickR = 0, clickI = 0, clickS = 0, clickCh = 0; //Счётчики кликов у кнопок в ScrollView
     RecyclerView recyclerView;
     ImageView open_menu, search;    //Кнопки Toolbar'а
-    ImageView cardURL,back;
+    ImageView cardURL,back,tick1,tick2,tick3,tick4,tick5;
     String x, y;    //Для геолокации
     LocationManager manager;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     SwipeRefreshLayout swipeRefreshLayout;
     DrawerLayout drawerLayout;
+    View pred,activ;
     ScrollView scroll2;
     HorizontalScrollView scrollCard;
     LinearLayout con,button_sheet;
-    TextView found, text;
-    Button burger, children, russian, italian, pizza, great_food, avtor, chicken, sushi;
+    TextView found, text,filter1;
+    Button burger, children, russian, italian, pizza, great_food, avtor, chicken, sushi,ok,sbros,ok_big;
     ImageButton setting;
     ArrayList<Restaurants> arrayList = new ArrayList<>();       //Данные для RecyclerView
     RestaurantsAdapter restaurantsAdapter;
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         sharedPreferences = getSharedPreferences("0", 0);
         scroll2 = findViewById(R.id.scroll2);
         scrollCard = findViewById(R.id.scrollCard);
+        pred = findViewById(R.id.view);
         scroll2.post(new Runnable() {   //Скролим SrollView до самого начала
             @Override
             public void run() {
@@ -111,6 +112,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         text = findViewById(R.id.text);
         con = findViewById(R.id.con);
         button_sheet = findViewById(R.id.bottom_sheet);
+        filter1 = findViewById(R.id.filter1);
+        tick1 = findViewById(R.id.tick1);
+        tick2 = findViewById(R.id.tick2);
+        tick3 = findViewById(R.id.tick3);
+        tick4 = findViewById(R.id.tick4);
+        tick5 = findViewById(R.id.tick5);
+        ok = findViewById(R.id.ok);
+        sbros = findViewById(R.id.sbros);
+        ok_big = findViewById(R.id.ok_big);
+        refactorButtons("one");
         bottomSheetBehavior = BottomSheetBehavior.from(button_sheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         navigationView = findViewById(R.id.nav_view);
@@ -212,20 +223,148 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if(newState == BottomSheetBehavior.STATE_HIDDEN){
+                if (newState == BottomSheetBehavior.STATE_HIDDEN) {   //При закрытии buttonSheet загрождение исчезает
                     back.setVisibility(View.INVISIBLE);
                 }
-            }
+                if(newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    switch (pred.getId()) {
+                        case R.id.view:
+                        case R.id.filter1:
+                            tick1.setImageResource(R.drawable.tick);
+                            tick2.setImageResource(R.color.white);
+                            tick3.setImageResource(R.color.white);
+                            tick4.setImageResource(R.color.white);
+                            tick5.setImageResource(R.color.white);
+                            refactorButtons("one");
+                            break;
+                        case R.id.filter2:
+                            tick1.setImageResource(R.color.white);
+                            tick2.setImageResource(R.drawable.tick);
+                            tick3.setImageResource(R.color.white);
+                            tick4.setImageResource(R.color.white);
+                            tick5.setImageResource(R.color.white);
+                            break;
+                        case R.id.filter3:
+                            tick1.setImageResource(R.color.white);
+                            tick2.setImageResource(R.color.white);
+                            tick3.setImageResource(R.drawable.tick);
+                            tick4.setImageResource(R.color.white);
+                            tick5.setImageResource(R.color.white);
+                            break;
+                        case R.id.filter4:
+                            tick1.setImageResource(R.color.white);
+                            tick2.setImageResource(R.color.white);
+                            tick3.setImageResource(R.color.white);
+                            tick4.setImageResource(R.drawable.tick);
+                            tick5.setImageResource(R.color.white);
+                            break;
+                        case R.id.filter5:
+                            tick1.setImageResource(R.color.white);
+                            tick2.setImageResource(R.color.white);
+                            tick3.setImageResource(R.color.white);
+                            tick4.setImageResource(R.color.white);
+                            tick5.setImageResource(R.drawable.tick);
+                            break;
 
+                    }
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            load = false;
+                        }
+                    },500);
+                }
+            }
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
             }
         });
 
-        checkPer(); //Проверяем разрешение методом
-
-
+        checkPer(); //Проверяем разрешение на геолокацию методом
+    }
+    public void onClickButtonSheen (View view) {             //Клики в ButtonSheen
+        if (!load) {
+            if (view.getId() == R.id.filter1 || view.getId() == R.id.tick1 || view.getId() == R.id.sbros) {
+                refactorButtons("one");
+                view.setId(R.id.filter1);
+                activ = view;
+                tick1.setImageResource(R.drawable.tick);
+                tick2.setImageResource(R.color.white);
+                tick3.setImageResource(R.color.white);
+                tick4.setImageResource(R.color.white);
+                tick5.setImageResource(R.color.white);
+                standartArrayList();
+            } else {
+                refactorButtons("two");
+                switch (view.getId()) {
+                    case R.id.ok_big:
+                    case R.id.ok:
+                        pred = activ;         //Указываем какая view подтверждина
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                        recyclerView.getAdapter().notifyDataSetChanged();    //Если не делать обновление - приложение крашится
+                        break;
+                    case R.id.filter2:
+                    case R.id.tick2:
+                        view.setId(R.id.filter2);
+                        activ = view;
+                        addNewArrayList(view);
+                        tick1.setImageResource(R.color.white);
+                        tick2.setImageResource(R.drawable.tick);
+                        tick3.setImageResource(R.color.white);
+                        tick4.setImageResource(R.color.white);
+                        tick5.setImageResource(R.color.white);
+                        break;
+                    case R.id.filter3:
+                    case R.id.tick3:
+                        view.setId(R.id.filter3);
+                        activ = view;
+                        addNewArrayList(view);
+                        tick1.setImageResource(R.color.white);
+                        tick2.setImageResource(R.color.white);
+                        tick3.setImageResource(R.drawable.tick);
+                        tick4.setImageResource(R.color.white);
+                        tick5.setImageResource(R.color.white);
+                        break;
+                    case R.id.filter4:
+                    case R.id.tick4:
+                        view.setId(R.id.filter4);
+                        activ = view;
+                        addNewArrayList(view);
+                        tick1.setImageResource(R.color.white);
+                        tick2.setImageResource(R.color.white);
+                        tick3.setImageResource(R.color.white);
+                        tick4.setImageResource(R.drawable.tick);
+                        tick5.setImageResource(R.color.white);
+                        break;
+                    case R.id.filter5:
+                    case R.id.tick5:
+                        view.setId(R.id.filter5);
+                        activ = view;
+                        addNewArrayList(view);
+                        tick1.setImageResource(R.color.white);
+                        tick2.setImageResource(R.color.white);
+                        tick3.setImageResource(R.color.white);
+                        tick4.setImageResource(R.color.white);
+                        tick5.setImageResource(R.drawable.tick);
+                        break;
+                }
+            }
+        }
+    }
+    public void refactorButtons (String i){
+        switch (i){
+            case "one":
+                ok.setVisibility(View.GONE);
+                sbros.setVisibility(View.GONE);
+                ok_big.setVisibility(View.VISIBLE);
+                break;
+            case "two":
+                ok.setVisibility(View.VISIBLE);
+                sbros.setVisibility(View.VISIBLE);
+                ok_big.setVisibility(View.GONE);
+                break;
+        }
     }
     public void checkPer (){
         //Проверка разрешения
@@ -254,6 +393,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override       //При обнавлении
     public void onRefresh() {
         checkPer();
+
         if(per) {
             found.setText("Загрузка"); //В это время происходит обнавлене геолокации
             onRebootLocation();//Метод обнавления геолокации
@@ -757,8 +897,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         arrayList.add(new Restaurants(10, "~70", 2, 4.0f, "KFC","Курица","none",stile_light));
     }
 
-    public void addNewArrayList (View view){    //Изменяем данные взависимости от нажатой кнопки в ScrollView
-        arrayList.clear();//Сбрасываем Лист
+    public void addNewArrayList (View view){    //Изменяем данные взависимости от нажатой кнопки в ScrollView и
+            arrayList.clear();//Сбрасываем Лист
+
         switch (view.getId()){
             case R.id.avtor: // Добавляем данные при нажатой кнопке Авторская в ScroolView
                 arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
@@ -793,6 +934,59 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             case R.id.russian:
                 arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
                 arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
+                break;
+                //Добавляем view из buttonSheet
+            case R.id.filter2:
+                arrayList.add(new Restaurants(9, "~35", 3, 5.0f, "Сушия","Суши","none",stile_light));
+                arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
+                arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
+                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+                arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none",stile_light));
+                arrayList.add(new Restaurants(10, "~70", 2, 4.0f, "KFC","Курица","none",stile_light));
+                arrayList.add(new Restaurants(8, "~55", 2, 4.0f, "Ташир пицца","Пицца","Итальянская",stile_light));
+                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
+                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
+                break;
+            case R.id.filter3:
+                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+                arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none",stile_light));
+                arrayList.add(new Restaurants(9, "~35", 3, 5.0f, "Сушия","Суши","none",stile_light));
+                arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
+                arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
+                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
+                arrayList.add(new Restaurants(8, "~55", 2, 4.0f, "Ташир пицца","Пицца","Итальянская",stile_light));
+                arrayList.add(new Restaurants(10, "~70", 2, 4.0f, "KFC","Курица","none",stile_light));
+                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
+                break;
+            case R.id.filter4:
+                arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
+                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
+                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+                arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none",stile_light));
+                arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
+                arrayList.add(new Restaurants(10, "~70", 2, 4.0f, "KFC","Курица","none",stile_light));
+                arrayList.add(new Restaurants(8, "~55", 2, 4.0f, "Ташир пицца","Пицца","Итальянская",stile_light));
+                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
+                arrayList.add(new Restaurants(9, "~35", 3, 5.0f, "Сушия","Суши","none",stile_light));
+                break;
+            case R.id.filter5:
+                arrayList.add(new Restaurants(1, "~20", 3, 3.5f, "Meet the Brewers","Авторская","Русская",stile_light));
+                arrayList.add(new Restaurants(6, "~75", 3, 2.0f, "Goofy's Kitchen","Пицца","Для детей",stile_light));
+                arrayList.add(new Restaurants(9, "~35", 3, 5.0f, "Сушия","Суши","none",stile_light));
+                arrayList.add(new Restaurants(2, "~30", 2, 4.0f, "Wendy's","Для детей","Бургеры",stile_light));
+                arrayList.add(new Restaurants(5, "~30", 2, 4.0f, "Domino's Pizza","Пицца","none",stile_light));
+                arrayList.add(new Restaurants(7, "~40", 2, 4.5f, "Brook Cafe","Авторская","none",stile_light));
+                arrayList.add(new Restaurants(10, "~70", 2, 4.0f, "KFC","Курица","none",stile_light));
+                arrayList.add(new Restaurants(8, "~55", 2, 4.0f, "Ташир пицца","Пицца","Итальянская",stile_light));
+                arrayList.add(new Restaurants(3, "~35", 1, 4.5f, "QLB","Бургеры","none",stile_light));
+                arrayList.add(new Restaurants(4, "~45", 1, 3.0f, "Ваши Насти","Здоровая еда","Русская",stile_light));
+                break;
+            case R.id.ok:
+            case R.id.ok_big:
+                recyclerView.getAdapter().notifyDataSetChanged();
                 break;
             default:    //На всякий случай
                 standartArrayList();
@@ -868,7 +1062,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if(!bool){
             standartArrayList();
         }
-        recyclerView.getAdapter().notifyDataSetChanged();   //Не помню почему эта строчка здесь
+        recyclerView.getAdapter().notifyDataSetChanged();   //Уведомляем об обновленние данных в адаптере
         drawerLayout.closeDrawer(GravityCompat.START);      //Закрываем боковое окно при смене темы
     }
     public boolean clickArrayList () {      //Метод, который меняет данные взависимости от нажатой кнопки и меняет скин этой кнопки
