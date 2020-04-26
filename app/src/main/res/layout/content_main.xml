@@ -2,9 +2,12 @@
 <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/con"
         android:layout_width="match_parent"
@@ -312,6 +315,13 @@
             </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
+    <ImageView
+        android:id="@+id/back"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@color/back" />
+</RelativeLayout>
     <include
         layout="@layout/button_sheet_content">
     </include>

@@ -14,6 +14,7 @@
     <color name="yellow">#E8FF00</color>
     <color name="grey_white">#BFBFBF</color>
     <color name="white_back_res">#F0F0EC</color>
+    <color name="back">#65000000</color>
     ----------Для смены тем--------------
     <color name="text_color_light">#000000</color>
     <color name="text_color_dark">#FFFF</color>

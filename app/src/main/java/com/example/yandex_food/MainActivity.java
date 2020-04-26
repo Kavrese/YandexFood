@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -44,12 +45,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private boolean start = true;
     private boolean other_button = false;
     private boolean per = false;
+    private boolean dawnClick = false;
     //Счётчики кликов по кнопке в ScrollView.   Кнопка:
     //Авторская     Бургеры     Для детей   Здоровая еда    Пицца    Русская    Итальянская     Суши      Курица
     int clickA = 0, clickB = 0, clickC = 0, clickG = 0, clickP = 0, clickR = 0, clickI = 0, clickS = 0, clickCh = 0; //Счётчики кликов у кнопок в ScrollView
     RecyclerView recyclerView;
     ImageView open_menu, search;    //Кнопки Toolbar'а
-    ImageView cardURL;
+    ImageView cardURL,back;
     String x, y;    //Для геолокации
     LocationManager manager;
     SharedPreferences sharedPreferences;
@@ -117,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         open_menu = findViewById(R.id.menuopen);
         drawerLayout = findViewById(R.id.drawer_layout);
         found = findViewById(R.id.found);
+        back = findViewById(R.id.back);
         setting = findViewById(R.id.setting);
         burger = findViewById(R.id.burger);
         children = findViewById(R.id.children);
@@ -147,7 +150,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     onSwithStile("light"); //Метод смены тем
                     break;
             }
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.setVisibility(View.INVISIBLE);
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {    //Клики по боковой панели
             @Override
@@ -199,7 +208,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 });
             }
         });
+
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if(newState == BottomSheetBehavior.STATE_HIDDEN){
+                    back.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
         checkPer(); //Проверяем разрешение методом
+
+
     }
     public void checkPer (){
         //Проверка разрешения
@@ -306,6 +332,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         switch (view.getId()){
             case R.id.setting:
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);       //Октраываем нижнюю панель
+                back.setVisibility(View.VISIBLE);
                 break;
             case R.id.italian:      //Нажатие на кнопку Итальянская
                 editClick("clickI");
