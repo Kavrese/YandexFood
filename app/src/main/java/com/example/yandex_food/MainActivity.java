@@ -220,13 +220,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {  //Слушатель открытия заднего меню
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_HIDDEN) {   //При закрытии buttonSheet загрождение исчезает
                     back.setVisibility(View.INVISIBLE);
                 }
                 if(newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    addNewArrayList(pred);
+                    recyclerView.getAdapter().notifyDataSetChanged();
                     switch (pred.getId()) {
                         case R.id.view:
                         case R.id.filter1:
