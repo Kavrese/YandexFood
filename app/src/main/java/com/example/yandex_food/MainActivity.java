@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         recyclerView.setAdapter(restaurantsAdapter);              //Присоединяем адаптер
         standartArrayList();    //Вызываем метод что-бы заполнить RecyclerView стандартными карточками
 
-            switch (sharedPreferences.getString("theme", "light")) {    //Если предыдущяя темы была тёмной изменяем boolean (т.к. по стандарту стоит true) и вызываем метод смены тем
+            switch (sharedPreferences.getString("theme", "light")) {    //Вызываем метод смены тем
                 case "dark":
                     stile_light = false;
                     onSwithStile("dark"); //Метод смены тем
@@ -212,9 +212,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 super.onScrolled(recyclerView, dx, dy);
                 scroll2.post(new Runnable() {
                     @Override
-                    public void run() {
-                        if (!start && !other_button) //Если приложение все прогрузило и не нажата ни одна кнопка, то при скролинге RecyclerView убираем SrollView
+                    public void run() {     //Если убрать if и оставить толко команду то при запуске scrollView
+                                            //будет опущен вниз
+                        if(load) {      //При запуске скролинг не чего не далает
+                            load = false;
+                        }else{          //А после прятает ScrollView
                             scroll2.fullScroll(ScrollView.FOCUS_DOWN);
+                        }
                     }
                 });
             }
@@ -227,6 +231,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     back.setVisibility(View.INVISIBLE);
                 }
                 if(newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    editClick("return");
+                    returnButtonInScrollView();
                     addNewArrayList(pred);
                     recyclerView.getAdapter().notifyDataSetChanged();
                     switch (pred.getId()) {
@@ -269,12 +275,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             break;
 
                     }
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            load = false;
-                        }
-                    },500);
                 }
             }
             @Override
@@ -305,6 +305,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         pred = activ;         //Указываем какая view подтверждина
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                         recyclerView.getAdapter().notifyDataSetChanged();    //Если не делать обновление - приложение крашится
+                        scroll2.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                scroll2.fullScroll(ScrollView.FOCUS_UP);
+                            }
+                        });
                         break;
                     case R.id.filter2:
                     case R.id.tick2:
@@ -427,6 +433,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     public void onSearch(View view) {    //Клик на кнопку поиска в ToolBar
         Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
+        Intent menu = new Intent(MainActivity.this,MenuActivity.class);
+        startActivity(menu);
     }
 
     public void onRebootLocation() {
@@ -751,7 +759,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
                     }
                 }
-                break;
         }
         if((clickI == 1)|| (clickS == 1) || (clickCh == 1) || (clickA == 1) || (clickG == 1) || (clickB == 1) || (clickR == 1) || (clickP == 1) || (clickC == 1)){
             other_button = true;    //При 1 клике
@@ -762,6 +769,29 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             other_button = false ;  //При 2 клике
             standartArrayList();// Если происходить 2 клика на любую кнопку, то применяем стандартные данные (т.е. возращяемся к тому, что было)
             recyclerView.getAdapter().notifyDataSetChanged();
+        }
+    }
+    public void returnButtonInScrollView (){
+        if(stile_light){
+            avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+            chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
+        }else {
+            avtor.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            burger.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            pizza.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            russian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            children.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            great_food.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            italian.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
+            chicken.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
         }
     }
 
