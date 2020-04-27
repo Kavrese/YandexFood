@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -283,6 +284,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
+
         checkPer(); //Проверяем разрешение на геолокацию методом
     }
     public void onClickButtonSheen (View view) {             //Клики в ButtonSheen
@@ -433,8 +435,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     public void onSearch(View view) {    //Клик на кнопку поиска в ToolBar
         Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
-        Intent menu = new Intent(MainActivity.this,MenuActivity.class);
-        startActivity(menu);
     }
 
     public void onRebootLocation() {

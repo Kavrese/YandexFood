@@ -1,5 +1,8 @@
 package com.example.yandex_food;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +29,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         this.restaurants = restaurants;
     }
 
-    class RestaurantsViewHolder extends RecyclerView.ViewHolder{
+    class RestaurantsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView id_img,poleIMG,walletIMG,starsIMG;
         TextView restaurant,stars,time,tag1,tag2,min;
         RestaurantsViewHolder(View view){
@@ -44,6 +47,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             walletIMG = view.findViewById(R.id.imageView4);
             starsIMG = view.findViewById(R.id.starsIMG);
             min = view.findViewById(R.id.min);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, MenuActivity.class);
+            context.startActivity(intent);
         }
     }
 
