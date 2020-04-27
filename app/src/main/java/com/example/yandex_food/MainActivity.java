@@ -283,8 +283,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
             }
         });
-
-
         checkPer(); //Проверяем разрешение на геолокацию методом
     }
     public void onClickButtonSheen (View view) {             //Клики в ButtonSheen

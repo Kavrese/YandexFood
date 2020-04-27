@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
@@ -16,10 +17,13 @@ ImageView back;
 Button pop,salat,pizza,burger,chik;
 HorizontalScrollView horizontalScrollView;
 ImageView img1;
+TextView name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        name = findViewById(R.id.name);
+        name.setText(getIntent().getStringExtra("name"));
         back = findViewById(R.id.back_menu);
 
         back.setOnClickListener(new View.OnClickListener() {        //Клик на кнопку назад в toolbar'е

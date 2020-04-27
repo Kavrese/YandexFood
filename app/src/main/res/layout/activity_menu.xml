@@ -166,7 +166,8 @@
         android:id="@+id/main_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="84">
+        android:layout_weight="84"
+        android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/lin_main"
@@ -257,8 +258,8 @@
                     android:layout_width="0dp"
                     android:layout_height="250dp"
                     android:layout_marginLeft="8dp"
-                    app:cardElevation="0dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -271,8 +272,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
-                            android:src="@drawable/img001"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img001" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -341,8 +342,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
-                            android:src="@drawable/img001"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img001" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -386,11 +387,11 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card4"
-                    app:cardElevation="0dp"
                     android:layout_width="0dp"
                     android:layout_height="250dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -403,8 +404,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
-                            android:src="@drawable/img001"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img001" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -458,11 +459,11 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card5"
-                    app:cardElevation="0dp"
                     android:layout_width="0dp"
                     android:layout_height="250dp"
                     android:layout_marginRight="8dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -475,8 +476,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
-                            android:src="@drawable/img001"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img001" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -523,7 +524,7 @@
                     android:layout_width="0dp"
                     android:layout_height="250dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
             </LinearLayout>
 
         </LinearLayout>

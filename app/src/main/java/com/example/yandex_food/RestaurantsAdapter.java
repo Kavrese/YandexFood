@@ -23,13 +23,12 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     private ImageView cost1;
     private ImageView cost2;
     private ImageView cost3;
-    private TextView tex;
     private boolean light;
     public RestaurantsAdapter(ArrayList<Restaurants> restaurants){
         this.restaurants = restaurants;
     }
 
-    class RestaurantsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class RestaurantsViewHolder extends RecyclerView.ViewHolder  {
         ImageView id_img,poleIMG,walletIMG,starsIMG;
         TextView restaurant,stars,time,tag1,tag2,min;
         RestaurantsViewHolder(View view){
@@ -47,26 +46,28 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             walletIMG = view.findViewById(R.id.imageView4);
             starsIMG = view.findViewById(R.id.starsIMG);
             min = view.findViewById(R.id.min);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            Context context = v.getContext();
-            Intent intent = new Intent(context, MenuActivity.class);
-            context.startActivity(intent);
         }
     }
 
     @NonNull
     @Override
-    public RestaurantsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.maket_card_recyclerview,parent,false);
-        return new RestaurantsViewHolder(view);
+    public RestaurantsViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.maket_card_recyclerview,parent,false);
+        final RestaurantsViewHolder res = new RestaurantsViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, MenuActivity.class);
+                intent.putExtra("name",res.restaurant.getText());
+                context.startActivity(intent);
+            }
+        });
+        return res;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RestaurantsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RestaurantsViewHolder holder, int position) {
         holder.tag1.setVisibility(View.VISIBLE);
         holder.tag2.setVisibility(View.VISIBLE);
 
@@ -176,4 +177,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public int getItemCount() {return restaurants.size();}
+
+
 }
