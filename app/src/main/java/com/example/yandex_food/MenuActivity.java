@@ -2,6 +2,7 @@ package com.example.yandex_food;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,6 @@ public class MenuActivity extends AppCompatActivity {
 ImageView back;
 Button pop,salat,pizza,burger,chik;
 HorizontalScrollView horizontalScrollView;
-ImageView img1;
 TextView name;
 HorizontalScrollView main;
     @Override
@@ -41,6 +41,13 @@ HorizontalScrollView main;
         burger = findViewById(R.id.bur);
         chik = findViewById(R.id.chick);
 
+    }
+    public void onClickShare (View view){
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);       //Настраиваем Intent на передачу данных в другие приложения
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Ну, предположим... Привет !");  //Сам отпровляемый контет
+        sendIntent.setType("text/plain");       //Указываем тип отправляемого контента
+        startActivity(Intent.createChooser(sendIntent,"Поделиться"));       //Запускаем Intent
     }
     public void onClickHorView (View view){
         switch (view.getId()){

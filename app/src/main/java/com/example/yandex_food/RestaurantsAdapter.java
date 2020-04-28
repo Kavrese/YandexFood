@@ -51,14 +51,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     @Override
     public RestaurantsViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.maket_card_recyclerview,parent,false);
-        final RestaurantsViewHolder res = new RestaurantsViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
+        final RestaurantsViewHolder res = new RestaurantsViewHolder(view);  //По сути это макет RecyclerView
+        view.setOnClickListener(new View.OnClickListener() {                //Запускаем слушатель кликов на макет RecyclerView
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, MenuActivity.class);
-                intent.putExtra("name",res.restaurant.getText());
-                context.startActivity(intent);
+                Context context = v.getContext();                              //Берём контекст кликнутой view
+                Intent intent = new Intent(context, MenuActivity.class);       //Подготовка Intent
+                intent.putExtra("name",res.restaurant.getText());       //Подготовка к передачае данных в другое активити через intent
+                context.startActivity(intent);                                 //Запуск активити через контекст view с данными
             }
         });
         return res;

@@ -58,7 +58,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:layout_weight="2.5"
-                android:background="@drawable/share" />
+                android:background="@drawable/share"
+                android:onClick="onClickShare" />
 
             <ImageView
                 android:id="@+id/search_menu"
@@ -736,7 +737,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="2"
-                            android:text="Пицца с ветчина"
+                            android:text="Пицца с ветчиной"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
