@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ Button pop,salat,pizza,burger,chik;
 HorizontalScrollView horizontalScrollView;
 ImageView img1;
 TextView name;
+HorizontalScrollView main;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ TextView name;
         name = findViewById(R.id.name);
         name.setText(getIntent().getStringExtra("name"));
         back = findViewById(R.id.back_menu);
-
+        main = findViewById(R.id.horizontalScrollView);
         back.setOnClickListener(new View.OnClickListener() {        //Клик на кнопку назад в toolbar'е
             @Override
             public void onClick(View v) {
@@ -38,7 +40,7 @@ TextView name;
         pizza = findViewById(R.id.pizza_menu);
         burger = findViewById(R.id.bur);
         chik = findViewById(R.id.chick);
-        img1 = findViewById(R.id.img1_card);
+
     }
     public void onClickHorView (View view){
         switch (view.getId()){
@@ -58,6 +60,9 @@ TextView name;
                 refactorScrollViewButtons("chick");
                 break;
         }
+    }
+    public void onSearchMenu (View view){
+        Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
     }
     public void refactorScrollViewButtons (String s){
         switch (s){

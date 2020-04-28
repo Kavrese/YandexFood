@@ -27,7 +27,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     public RestaurantsAdapter(ArrayList<Restaurants> restaurants){
         this.restaurants = restaurants;
     }
-
     class RestaurantsViewHolder extends RecyclerView.ViewHolder  {
         ImageView id_img,poleIMG,walletIMG,starsIMG;
         TextView restaurant,stars,time,tag1,tag2,min;
@@ -48,7 +47,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             min = view.findViewById(R.id.min);
         }
     }
-
     @NonNull
     @Override
     public RestaurantsViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
@@ -65,12 +63,10 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         });
         return res;
     }
-
     @Override
     public void onBindViewHolder(@NonNull final RestaurantsViewHolder holder, int position) {
         holder.tag1.setVisibility(View.VISIBLE);
         holder.tag2.setVisibility(View.VISIBLE);
-
         light = restaurants.get(position).getLight();
         if(light){                              //Если тема светлая
             holder.restaurant.setTextColor(Color.argb(255,0,0,0));
@@ -128,7 +124,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                     break;
             }
         }
-
            switch (restaurants.get(position).getId_img()) {
                case 1:
                    holder.id_img.setBackgroundResource(R.drawable.img1);
@@ -160,7 +155,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                case 10:
                    holder.id_img.setBackgroundResource(R.drawable.img10);
                    break;
-
            }
            holder.time.setText(restaurants.get(position).getTime());
 
@@ -174,7 +168,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                holder.tag2.setText(" "+restaurants.get(position).getTag2());
            }
        }
-
     @Override
     public int getItemCount() {return restaurants.size();}
 
