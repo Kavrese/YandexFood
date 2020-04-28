@@ -180,7 +180,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="50dp"
             android:orientation="vertical"
             android:weightSum="96">
 
@@ -208,22 +208,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/pop_1" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Тако с мясом"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -242,7 +242,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="300Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -250,7 +250,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="500г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -271,22 +271,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/pizza_1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Пицца Пепперони"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -305,7 +305,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="400Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -313,7 +313,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="880г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -343,22 +343,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/pop_2" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Сэммич"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -377,7 +377,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="200Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -406,22 +406,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/pop_3" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Итальянский хот-док"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -441,7 +441,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="100Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -450,7 +450,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="100г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -480,22 +480,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/ch_1" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Fried Chicken"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -514,7 +514,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="800Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -522,7 +522,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="650г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -572,22 +572,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/salat_1" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Оливье"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -606,7 +606,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="180Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -614,7 +614,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="200г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -635,22 +635,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/salat_2" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Цезарь"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -669,7 +669,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="200Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -677,7 +677,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="300г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -721,22 +721,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/pizza_2" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Пицца с ветчина"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -755,7 +755,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="850Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -763,7 +763,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="900г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -784,22 +784,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/pizza_1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Пицца Пепперони"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -818,7 +818,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="400Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -826,7 +826,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="880г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -857,22 +857,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/pizza_3" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Пицца с овощями"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -891,7 +891,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="300Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -899,7 +899,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="350г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -949,22 +949,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/burger_1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Биг Мак"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -983,7 +983,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="300Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -991,7 +991,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="400г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -1012,22 +1012,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/burger_2" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Black Burger"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -1046,7 +1046,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="350Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -1077,7 +1077,7 @@
                 android:id="@+id/lin8"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="10"
                 android:orientation="horizontal"
                 android:weightSum="2">
@@ -1097,22 +1097,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/ch_2" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Жаренные ножки"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -1131,7 +1131,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="80Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -1139,7 +1139,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="50г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -1160,22 +1160,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/ch_1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Fried Chicken"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -1194,7 +1194,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="800Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -1202,7 +1202,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="650г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -1233,7 +1233,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:id="@+id/img1_card"
@@ -1241,7 +1241,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/ch_3" />
 
                         <TextView
                             android:id="@+id/textView25"
@@ -1249,8 +1249,8 @@
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Стрипсы"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -1269,7 +1269,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="30Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -1277,7 +1277,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="40г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -1298,22 +1298,22 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
                         android:orientation="vertical"
-                        android:weightSum="9.5">
+                        android:weightSum="10">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/img001" />
+                            android:src="@drawable/ch_4" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_weight="1.5"
-                            android:text="Набор кешбек"
+                            android:layout_weight="2"
+                            android:text="Жаренная ляшка"
                             android:textColor="#070707"
                             android:textSize="18sp" />
 
@@ -1332,7 +1332,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="left"
-                                android:text="150Р"
+                                android:text="50Р"
                                 android:textColor="#000000" />
 
                             <TextView
@@ -1340,7 +1340,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="250г"
+                                android:text="45г"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>

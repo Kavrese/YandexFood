@@ -126,34 +126,34 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         }
            switch (restaurants.get(position).getId_img()) {
                case 1:
-                   holder.id_img.setBackgroundResource(R.drawable.img1);
+                   holder.id_img.setImageResource(R.drawable.img1);
                    break;
                case 2:
-                   holder.id_img.setBackgroundResource(R.drawable.img2);
+                   holder.id_img.setImageResource(R.drawable.img2);
                    break;
                case 3:
-                   holder.id_img.setBackgroundResource(R.drawable.img3);
+                   holder.id_img.setImageResource(R.drawable.img3);
                    break;
                case 4:
-                   holder.id_img.setBackgroundResource(R.drawable.img4);
+                   holder.id_img.setImageResource(R.drawable.img4);
                    break;
                case 5:
-                   holder.id_img.setBackgroundResource(R.drawable.img5);
+                   holder.id_img.setImageResource(R.drawable.img5);
                    break;
                case 6:
-                   holder.id_img.setBackgroundResource(R.drawable.img6);
+                   holder.id_img.setImageResource(R.drawable.img6);
                    break;
                case 7:
-                   holder.id_img.setBackgroundResource(R.drawable.img7);
+                   holder.id_img.setImageResource(R.drawable.img7);
                    break;
                case 8:
-                   holder.id_img.setBackgroundResource(R.drawable.img8);
+                   holder.id_img.setImageResource(R.drawable.img8);
                    break;
                case 9:
-                   holder.id_img.setBackgroundResource(R.drawable.img9);
+                   holder.id_img.setImageResource(R.drawable.img9);
                    break;
                case 10:
-                   holder.id_img.setBackgroundResource(R.drawable.img10);
+                   holder.id_img.setImageResource(R.drawable.img10);
                    break;
            }
            holder.time.setText(restaurants.get(position).getTime());
