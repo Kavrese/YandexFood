@@ -2,10 +2,12 @@ package com.example.yandex_food;
 
 import android.Manifest;
 import android.app.DownloadManager;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private boolean other_button = false;
     private boolean per = false;
     private boolean load = true;
+    private boolean click_filter = false;
     //Счётчики кликов по кнопке в ScrollView.   Кнопка:
     //Авторская     Бургеры     Для детей   Здоровая еда    Пицца    Русская    Итальянская     Суши      Курица
     int clickA = 0, clickB = 0, clickC = 0, clickG = 0, clickP = 0, clickR = 0, clickI = 0, clickS = 0, clickCh = 0; //Счётчики кликов у кнопок в ScrollView
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     RestaurantsAdapter restaurantsAdapter;
     NavigationView navigationView;
     BottomSheetBehavior bottomSheetBehavior;
+    MenuItem enter,about,messenge,exit,color,run;
     private LocationListener listener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {      //При обновлении
@@ -94,6 +98,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        about = findViewById(R.id.nav_about);
+        enter = findViewById(R.id.nav_enter);
+        messenge = findViewById(R.id.nav_support);
+        exit = findViewById(R.id.nav_exit);
+        color = findViewById(R.id.nav_stile);
+        run = findViewById(R.id.nav_man);
         sharedPreferences = getSharedPreferences("0", 0);
         scroll2 = findViewById(R.id.scroll2);
         scrollCard = findViewById(R.id.scrollCard);
@@ -150,8 +160,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         restaurantsAdapter = new RestaurantsAdapter(arrayList);         //Создаём адаптер
         recyclerView.setAdapter(restaurantsAdapter);              //Присоединяем адаптер
-        standartArrayList();    //Вызываем метод что-бы заполнить RecyclerView стандартными карточками
-
+            standartArrayList();
             switch (sharedPreferences.getString("theme", "light")) {    //Вызываем метод смены тем
                 case "dark":
                     stile_light = false;
@@ -303,6 +312,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     case R.id.ok_big:
                     case R.id.ok:
                         pred = activ;         //Указываем какая view подтверждина
+                        click_filter = true;
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                         recyclerView.getAdapter().notifyDataSetChanged();    //Если не делать обновление - приложение крашится
                         scroll2.post(new Runnable() {
@@ -476,12 +486,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 }
 
     public void onClickScrollView (View view){  //При клике на кнопки в ScrollView
-        arrayList.clear();  //Очищяем лист для адаптера RecyclerView
+        if(view.getId() == R.id.setting){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);       //Октраываем нижнюю панель
+            back.setVisibility(View.VISIBLE);
+        }else
+            arrayList.clear();  //Очищяем лист для адаптера RecyclerView
+
         switch (view.getId()){
-            case R.id.setting:
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);       //Октраываем нижнюю панель
-                back.setVisibility(View.VISIBLE);
-                break;
             case R.id.italian:      //Нажатие на кнопку Итальянская
                 editClick("clickI");
                 if(stile_light) {   //При светлой теме
@@ -1024,7 +1035,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
-    public void onSwithStile (String theme){    //Метод изменения тем
+    public void onSwithStile (String theme){    //Метод изменения темы
         if (theme.equals("dark")){              //Если тема должна быть тёмной
             stile_light = false;
             editor = sharedPreferences.edit();  //
@@ -1055,6 +1066,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             sushi.setTextColor(getResources().getColor(R.color.text_color_dark));
             sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_dark);
             text.setTextColor(getResources().getColor(R.color.white));
+            navigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.grey_white)));
+            navigationView.setBackgroundColor(getResources().getColor(R.color.dark_up_back));
         }
         //Дальше по такому-же принцыпу
         if(theme.equals("light")){      //Если тема должа быть светлой
@@ -1086,15 +1099,22 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             sushi.setTextColor(getResources().getColor(R.color.text_color_light));
             sushi.setBackgroundResource(R.drawable.maket_button_in_scroll_view_no_light);
             text.setTextColor(getResources().getColor(R.color.dark));
+            navigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.dark)));
+            navigationView.setBackgroundColor(getResources().getColor(R.color.white));
         }
         //Если нажата хоть одна кнопка, в ScrollVIew - не меняем данные для адаптера
         boolean bool = clickArrayList();
-        if(!bool){
+        if(!bool && !click_filter){
             standartArrayList();
+        }else{
+            if(click_filter){
+                addNewArrayList(pred);
+            }
         }
         recyclerView.getAdapter().notifyDataSetChanged();   //Уведомляем об обновленние данных в адаптере
         drawerLayout.closeDrawer(GravityCompat.START);      //Закрываем боковое окно при смене темы
     }
+
     public boolean clickArrayList () {      //Метод, который меняет данные взависимости от нажатой кнопки и меняет скин этой кнопки
         boolean bool = false;   //Если есть нажатай кнопка - true
 

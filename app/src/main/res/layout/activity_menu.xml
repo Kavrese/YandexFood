@@ -87,10 +87,11 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/lin_hor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:background="@color/white"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
@@ -205,6 +206,7 @@
                     app:cardElevation="0dp">
 
                     <LinearLayout
+                        android:id="@+id/lina"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
@@ -718,6 +720,7 @@
                     app:cardElevation="0dp">
 
                     <LinearLayout
+                        android:id="@+id/lil_card"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/maket_card"
@@ -725,6 +728,7 @@
                         android:weightSum="10">
 
                         <ImageView
+                            android:id="@+id/img90"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="7"
@@ -1214,7 +1218,7 @@
                 android:id="@+id/lin9"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="10"
                 android:orientation="horizontal"
                 android:weightSum="2">

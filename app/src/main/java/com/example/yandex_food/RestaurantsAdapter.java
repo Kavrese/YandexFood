@@ -2,21 +2,18 @@ package com.example.yandex_food;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.RestaurantsViewHolder> {
     private ArrayList<Restaurants> restaurants;
@@ -30,6 +27,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
     class RestaurantsViewHolder extends RecyclerView.ViewHolder  {
         ImageView id_img,poleIMG,walletIMG,starsIMG;
         TextView restaurant,stars,time,tag1,tag2,min;
+        LinearLayout lin_time;
         RestaurantsViewHolder(View view){
             super(view);
             id_img = view.findViewById(R.id.img);
@@ -41,10 +39,11 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             tag2 = view.findViewById(R.id.tag2);
             stars = view.findViewById(R.id.star);
             restaurant = view.findViewById(R.id.restaurant);
-            poleIMG = view.findViewById(R.id.imageView);
+            poleIMG = view.findViewById(R.id.line);
             walletIMG = view.findViewById(R.id.imageView4);
             starsIMG = view.findViewById(R.id.starsIMG);
             min = view.findViewById(R.id.min);
+            lin_time = view.findViewById(R.id.lin_time);
         }
     }
     @NonNull
@@ -75,9 +74,10 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             holder.tag2.setTextColor(Color.argb(255,179,179,179));
             holder.stars.setTextColor(Color.argb(255,0,0,0));
             holder.walletIMG.setBackgroundResource(R.drawable.wallet);
-            holder.poleIMG.setBackgroundResource(R.color.white);
+            holder.poleIMG.setBackgroundResource(R.color.white_back_2);
             holder.starsIMG.setBackgroundResource(R.drawable.star);
             holder.poleIMG.setBackgroundResource(R.color.white);
+            holder.lin_time.setBackgroundResource(R.drawable.maket_time);
             holder.min.setTextColor(Color.argb(255,0,0,0));
             switch (restaurants.get(position).getCost()) {
                 case 1:
@@ -105,6 +105,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             holder.walletIMG.setBackgroundResource(R.drawable.wallet_light);
             holder.poleIMG.setBackgroundResource(R.color.dark_up_back);
             holder.starsIMG.setBackgroundResource(R.drawable.star_light);
+            holder.lin_time.setBackgroundResource(R.drawable.maket_time_dark);
             holder.min.setTextColor(Color.argb(255,179,179,179));
             switch (restaurants.get(position).getCost()) {
                 case 1:
