@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -42,7 +43,7 @@ LinearLayout lin5,lin_hor,lin4,lin1,lin7,lin8;
         lin7 = findViewById(R.id.lin7);
         lin8 = findViewById(R.id.lin8);
         main = findViewById(R.id.main_scroll);
-         back.setOnClickListener(new View.OnClickListener() {        //Клик на кнопку назад в toolbar'е
+        back.setOnClickListener(new View.OnClickListener() {        //Клик на кнопку назад в toolbar'е
             @Override
             public void onClick(View v) {
                 finish();
@@ -54,7 +55,37 @@ LinearLayout lin5,lin_hor,lin4,lin1,lin7,lin8;
         pizza = findViewById(R.id.pizza_menu);
         burger = findViewById(R.id.bur);
         chik = findViewById(R.id.chick);
-
+        //Делаем возможность фокусировки на view
+        chik.setFocusableInTouchMode(true);
+        burger.setFocusableInTouchMode(true);
+        pizza.setFocusableInTouchMode(true);
+        salat.setFocusableInTouchMode(true);
+        pop.setFocusableInTouchMode(true);
+            main.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                if(main.getScrollY() >= 0 && main.getScrollY() <= 1307){
+                    refactorScrollViewButtons("pop");
+                    pop.requestFocus();
+                }
+                if(main.getScrollY() >= 1307 && main.getScrollY() <= 2057){
+                    refactorScrollViewButtons("salat");
+                    salat.requestFocus();
+                }
+                if(main.getScrollY() >= 2057 && main.getScrollY() <= 3263){
+                    refactorScrollViewButtons("pizza");
+                    pizza.requestFocus();
+                }
+                if(main.getScrollY() >= 3263 && main.getScrollY() <= 4256){
+                    refactorScrollViewButtons("burger");
+                    burger.requestFocus();
+                }
+                if(main.getScrollY() >= 4256 && main.getScrollY() <= 5000){
+                    refactorScrollViewButtons("chick");
+                    chik.requestFocus();
+                }
+            }
+        });
     }
     public void onClickShare (View view){
         Intent sendIntent = new Intent();
@@ -68,7 +99,6 @@ LinearLayout lin5,lin_hor,lin4,lin1,lin7,lin8;
             case R.id.pop:
                 refactorScrollViewButtons("pop");
                 main.post(new Runnable() {
-                    @SuppressLint("ResourceType")
                     public void run() {
                         main.smoothScrollTo(0, lin1.getBottom()-580 );
                     }
@@ -77,7 +107,6 @@ LinearLayout lin5,lin_hor,lin4,lin1,lin7,lin8;
             case R.id.salat:
                 refactorScrollViewButtons("salat");
                 main.post(new Runnable() {
-                    @SuppressLint("ResourceType")
                     public void run() {
                         main.smoothScrollTo(0, lin4.getBottom()-580 );
                     }
@@ -86,7 +115,6 @@ LinearLayout lin5,lin_hor,lin4,lin1,lin7,lin8;
             case R.id.pizza_menu:
                 refactorScrollViewButtons("pizza");
                 main.post(new Runnable() {
-                    @SuppressLint("ResourceType")
                     public void run() {
                         main.smoothScrollTo(0, lin5.getBottom()-580 );
                     }
@@ -95,7 +123,6 @@ LinearLayout lin5,lin_hor,lin4,lin1,lin7,lin8;
             case R.id.bur:
                 refactorScrollViewButtons("burger");
                 main.post(new Runnable() {
-                    @SuppressLint("ResourceType")
                     public void run() {
                         main.smoothScrollTo(0, lin7.getBottom()-580 );
                     }
@@ -104,7 +131,6 @@ LinearLayout lin5,lin_hor,lin4,lin1,lin7,lin8;
             case R.id.chick:
                 refactorScrollViewButtons("chick");
                 main.post(new Runnable() {
-                    @SuppressLint("ResourceType")
                     public void run() {
                         main.smoothScrollTo(0, lin8.getBottom()-580 );
                     }
