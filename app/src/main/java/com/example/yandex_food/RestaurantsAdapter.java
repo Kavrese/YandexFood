@@ -74,9 +74,8 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             holder.tag2.setTextColor(Color.argb(255,179,179,179));
             holder.stars.setTextColor(Color.argb(255,0,0,0));
             holder.walletIMG.setBackgroundResource(R.drawable.wallet);
-            holder.poleIMG.setBackgroundResource(R.color.white_back_2);
             holder.starsIMG.setBackgroundResource(R.drawable.star);
-            holder.poleIMG.setBackgroundResource(R.color.white);
+            holder.poleIMG.setBackgroundResource(R.color.white_2);
             holder.lin_time.setBackgroundResource(R.drawable.maket_time);
             holder.min.setTextColor(Color.argb(255,0,0,0));
             switch (restaurants.get(position).getCost()) {

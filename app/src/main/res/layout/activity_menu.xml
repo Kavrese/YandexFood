@@ -82,7 +82,6 @@
         android:id="@+id/hor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="5dp"
         android:layout_weight="8"
         android:scrollbars="none">
 
@@ -99,7 +98,7 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/maket_button_in_scroll_view_yes"
                 android:onClick="onClickHorView"

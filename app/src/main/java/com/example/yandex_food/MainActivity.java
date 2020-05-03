@@ -1,10 +1,7 @@
 package com.example.yandex_food;
 
 import android.Manifest;
-import android.app.DownloadManager;
-import android.content.ClipData;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
@@ -12,13 +9,10 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
@@ -27,10 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
@@ -39,7 +31,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
@@ -93,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         public void onProviderDisabled(String provider) {
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {    //Клики по боковой панели
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -215,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         //Настраиваем swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(this);//Включаем слушатель
         swipeRefreshLayout.setColorSchemeResources(R.color.blue_dark);      //Устанавливаем цвета анимации обновления
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {  //При прокрутке RecyclerView убирает остальные элементы в ScrollView
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -233,7 +221,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 });
             }
         });
-
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {  //Слушатель открытия заднего меню
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -288,9 +275,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
             }
             @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {}
         });
         checkPer(); //Проверяем разрешение на геолокацию методом
     }
@@ -407,7 +392,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
         }
     }
-
     @Override       //При обнавлении
     public void onRefresh() {
         checkPer();
@@ -425,11 +409,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         }, 2000);
     }
-
     public void onOpenDrawer(View view) {  //Клик на кнопку, открывающяя боковую панель, в Toolbar
         drawerLayout.openDrawer(GravityCompat.START);
     }
-
     public void onClickHorScrollView(View view){
         switch (view.getId()){
             case R.id.card1:
@@ -474,17 +456,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         }
     }
-
     private boolean isNetworkConnected() {//Метод проверки интернета
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
     public boolean isGPSConnected() {   ////Метод проверки GPS
     boolean enabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     return enabled;
 }
-
     public void onClickScrollView (View view){  //При клике на кнопки в ScrollView
         if(view.getId() == R.id.setting){
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);       //Октраываем нижнюю панель
