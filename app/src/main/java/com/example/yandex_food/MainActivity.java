@@ -13,7 +13,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private boolean per = false;
     private boolean load = true;
     private boolean click_filter = false;
+    private boolean click_button = false;
     //Счётчики кликов по кнопке в ScrollView.   Кнопка:
     //Авторская     Бургеры     Для детей   Здоровая еда    Пицца    Русская    Итальянская     Суши      Курица
     int clickA = 0, clickB = 0, clickC = 0, clickG = 0, clickP = 0, clickR = 0, clickI = 0, clickS = 0, clickCh = 0; //Счётчики кликов у кнопок в ScrollView
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     SharedPreferences.Editor editor;
     SwipeRefreshLayout swipeRefreshLayout;
     DrawerLayout drawerLayout;
+    FrameLayout fr1;
     View pred,activ;
     ScrollView scroll2;
     HorizontalScrollView scrollCard;
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     NavigationView navigationView;
     BottomSheetBehavior bottomSheetBehavior;
     MenuItem enter,about,messenge,exit,color,run;
+    Animation one_two,two_one;
     private LocationListener listener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {      //При обновлении
@@ -88,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        one_two = AnimationUtils.loadAnimation(this,R.anim.anim_button_1_2);
+        two_one = AnimationUtils.loadAnimation(this,R.anim.anim_button_2_1);
         about = findViewById(R.id.nav_about);
         enter = findViewById(R.id.nav_enter);
         messenge = findViewById(R.id.nav_support);
@@ -113,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         text = findViewById(R.id.text);
         con = findViewById(R.id.con);
         button_sheet = findViewById(R.id.bottom_sheet);
-        filter1 = findViewById(R.id.filter1);
         tick1 = findViewById(R.id.tick1);
         tick2 = findViewById(R.id.tick2);
         tick3 = findViewById(R.id.tick3);
@@ -233,7 +240,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     addNewArrayList(pred);
                     recyclerView.getAdapter().notifyDataSetChanged();
                     switch (pred.getId()) {
-                        case R.id.view:
                         case R.id.filter1:
                             tick1.setImageResource(R.drawable.tick);
                             tick2.setImageResource(R.color.white);
@@ -283,6 +289,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (!load) {
             if (view.getId() == R.id.filter1 || view.getId() == R.id.tick1 || view.getId() == R.id.sbros) {
                 refactorButtons("one");
+
                 view.setId(R.id.filter1);
                 activ = view;
                 tick1.setImageResource(R.drawable.tick);
@@ -361,11 +368,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 ok.setVisibility(View.GONE);
                 sbros.setVisibility(View.GONE);
                 ok_big.setVisibility(View.VISIBLE);
+                click_button = false;
+                ok_big.startAnimation(two_one);
                 break;
             case "two":
                 ok.setVisibility(View.VISIBLE);
                 sbros.setVisibility(View.VISIBLE);
                 ok_big.setVisibility(View.GONE);
+                if(!click_button) {
+                    ok.startAnimation(one_two);
+                    sbros.startAnimation(one_two);
+                    click_button = true;
+                }
                 break;
         }
     }

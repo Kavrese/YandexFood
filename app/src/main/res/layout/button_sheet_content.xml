@@ -25,7 +25,6 @@
             android:layout_marginRight="140dp"
             app:srcCompat="@drawable/maket_button_sheet_2" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,131 +47,157 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            android:weightSum="20">
+            android:orientation="vertical"
+            android:weightSum="6">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="18.5"
-                android:orientation="vertical"
-                android:weightSum="5">
+                android:id="@+id/lin_filter_1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="10">
 
                 <TextView
                     android:id="@+id/filter1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8.5"
+                    android:gravity="center|left"
                     android:onClick="onClickButtonSheen"
                     android:text="Доверюсь вам"
                     android:textColor="#000000"
                     android:textSize="19sp"
                     android:visibility="visible" />
 
+                <ImageView
+                    android:id="@+id/tick1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/tick"
+                    android:onClick="onClickButtonSheen" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_filter_2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:onClick="onClickButtonSheen"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
                 <TextView
                     android:id="@+id/filter2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8.5"
+                    android:gravity="center|left"
+                    android:clickable="false"
                     android:onClick="onClickButtonSheen"
                     android:text="С высоким рейтингом"
                     android:textColor="#000000"
                     android:textSize="19sp" />
 
+                <ImageView
+                    android:id="@+id/tick2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:clickable="false"
+                    android:background="#FFFFFF"
+                    android:onClick="onClickButtonSheen"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_filter_3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
                 <TextView
                     android:id="@+id/filter3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8.5"
+                    android:gravity="center|left"
                     android:onClick="onClickButtonSheen"
                     android:text="Быстрые"
                     android:textColor="#000000"
                     android:textSize="19sp" />
 
+                <ImageView
+                    android:id="@+id/tick3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="#FFFFFF"
+                    android:onClick="onClickButtonSheen"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_filter_4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
                 <TextView
                     android:id="@+id/filter4"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8.5"
+                    android:gravity="center|left"
                     android:onClick="onClickButtonSheen"
                     android:text="Недорогие"
                     android:textColor="#000000"
                     android:textSize="19sp" />
 
+                <ImageView
+                    android:id="@+id/tick4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="#FFFFFF"
+                    android:onClick="onClickButtonSheen"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_filter_5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
                 <TextView
                     android:id="@+id/filter5"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8.5"
+                    android:gravity="center|left"
                     android:onClick="onClickButtonSheen"
                     android:text="Дорогие"
                     android:textColor="#000000"
                     android:textSize="19sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:gravity="right"
-                android:orientation="vertical"
-                android:weightSum="5">
-
-                <ImageView
-                    android:id="@+id/tick1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/tick"
-                    android:onClick="onClickButtonSheen" />
-
-                <ImageView
-                    android:id="@+id/tick2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:onClick="onClickButtonSheen"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/tick3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:onClick="onClickButtonSheen"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/tick4"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:onClick="onClickButtonSheen"
-                    android:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/tick5"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
                     android:background="#FFFF"
                     android:onClick="onClickButtonSheen"
                     android:visibility="visible" />
-            </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
