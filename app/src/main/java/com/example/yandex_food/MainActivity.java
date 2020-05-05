@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private boolean load = true;
     private boolean click_filter = false;
     private boolean click_button = false;
+    private boolean click_ok_big = true;
     //Счётчики кликов по кнопке в ScrollView.   Кнопка:
     //Авторская     Бургеры     Для детей   Здоровая еда    Пицца    Русская    Итальянская     Суши      Курица
     int clickA = 0, clickB = 0, clickC = 0, clickG = 0, clickP = 0, clickR = 0, clickI = 0, clickS = 0, clickCh = 0; //Счётчики кликов у кнопок в ScrollView
@@ -56,11 +57,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     SharedPreferences.Editor editor;
     SwipeRefreshLayout swipeRefreshLayout;
     DrawerLayout drawerLayout;
-    FrameLayout fr1;
     View pred,activ;
     ScrollView scroll2;
     HorizontalScrollView scrollCard;
-    LinearLayout con,button_sheet;
+    LinearLayout con,button_sheet,lin1,lin2,lin3,lin4,lin5;
     TextView found, text,filter1;
     Button burger, children, russian, italian, pizza, great_food, avtor, chicken, sushi,ok,sbros,ok_big;
     ImageButton setting;
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     NavigationView navigationView;
     BottomSheetBehavior bottomSheetBehavior;
     MenuItem enter,about,messenge,exit,color,run;
-    Animation one_two,two_one;
+    Animation one_two,two_one,click;
     private LocationListener listener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {      //При обновлении
@@ -94,8 +94,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        lin1 = findViewById(R.id.lin_filter_1);
+        lin2 = findViewById(R.id.lin_filter_2);
         one_two = AnimationUtils.loadAnimation(this,R.anim.anim_button_1_2);
         two_one = AnimationUtils.loadAnimation(this,R.anim.anim_button_2_1);
+        click = AnimationUtils.loadAnimation(this,R.anim.anim_click_button_sheet);
         about = findViewById(R.id.nav_about);
         enter = findViewById(R.id.nav_enter);
         messenge = findViewById(R.id.nav_support);
@@ -289,7 +292,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (!load) {
             if (view.getId() == R.id.filter1 || view.getId() == R.id.tick1 || view.getId() == R.id.sbros) {
                 refactorButtons("one");
-
                 view.setId(R.id.filter1);
                 activ = view;
                 tick1.setImageResource(R.drawable.tick);
@@ -368,14 +370,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 ok.setVisibility(View.GONE);
                 sbros.setVisibility(View.GONE);
                 ok_big.setVisibility(View.VISIBLE);
-                click_button = false;
                 ok_big.startAnimation(two_one);
                 break;
             case "two":
                 ok.setVisibility(View.VISIBLE);
                 sbros.setVisibility(View.VISIBLE);
                 ok_big.setVisibility(View.GONE);
-                if(!click_button) {
+                if(!click_button) {     //Таким образом избавляемся от павторной анимацией
                     ok.startAnimation(one_two);
                     sbros.startAnimation(one_two);
                     click_button = true;
@@ -411,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         checkPer();
 
         if(per) {
-            found.setText("Загрузка"); //В это время происходит обнавлене геолокации
+            found.setText("Загрузка..."); //В это время происходит обнавлене геолокации
             onRebootLocation();//Метод обнавления геолокации
         }else{
             found.setText("Предоставьте разрешение на геолокацию");
@@ -463,7 +464,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             if (!per) {
                                 found.setText("Предоставте разрешение на геолокацию");
                             }
-                            if (found.getText().equals("Загрузка")) //Проверяем завершилась ли обновление
+                            if (found.getText().equals("Загрузка...")) //Проверяем завершилась ли обновление
                                 found.setText("Ошибка");    //Если за это время не произошло оновление, то ввыводим ошибку, но не прекращяем обновлять
                         }
                     }, 20000);

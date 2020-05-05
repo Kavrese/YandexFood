@@ -34,6 +34,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
                 android:gravity="center"
                 android:weightSum="24"
                 app:layout_constraintBottom_toBottomOf="@+id/toolbar"
@@ -53,7 +54,7 @@
                     android:id="@+id/found"
                     android:layout_width="0dp"
                     android:layout_height="35dp"
-                    android:layout_weight="17"
+                    android:layout_weight="19"
                     android:background="@drawable/found_maket_light"
                     android:gravity="center"
                     android:text="Загрузка..."
@@ -65,7 +66,7 @@
                     android:id="@+id/search"
                     android:layout_width="40dp"
                     android:layout_height="28dp"
-                    android:layout_weight="3"
+                    android:layout_weight="1"
                     android:onClick="onSearch"
                     android:src="@drawable/search">
 
