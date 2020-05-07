@@ -2,6 +2,7 @@ package com.example.yandex_food;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     ScrollView scroll2;
     HorizontalScrollView scrollCard;
     LinearLayout con,button_sheet,lin1,lin2,lin3,lin4,lin5;
-    TextView found, text,filter1;
+    TextView found, text;
     Button burger, children, russian, italian, pizza, great_food, avtor, chicken, sushi,ok,sbros,ok_big;
     ImageButton setting;
     ArrayList<Restaurants> arrayList = new ArrayList<>();       //Данные для RecyclerView
@@ -439,7 +440,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     public void onSearch(View view) {    //Клик на кнопку поиска в ToolBar
+
         Toast.makeText(this, "Поиск", Toast.LENGTH_SHORT).show();
+        Intent inTest = new Intent(this,TestActivity.class);
+        startActivity(inTest);
     }
 
     public void onRebootLocation() {
